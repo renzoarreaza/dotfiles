@@ -17,8 +17,9 @@ augroup END
 nnoremap <leader>& :vs<cr>:set scb<cr>2<c-w>w<c-f>:set scb<cr>1<c-w>w
 " use \* to close split on the right and disable scrollbind 
 nnoremap <leader>* 2<c-w>w:set noscb<cr>:q<cr>:set noscb<cr>
-" achieves the same as the above mapping. 
-" nnoremap :q :windo set noscb<cr>:q
+" use \m to toggle mouse between a (all) and desabled
+map <leader>m <ESC>:exec &mouse!=""? "set mouse=" : "set mouse=a"<CR>
+
 
 colorscheme peachpuff	" picking a colorscheme for syntax
 set cursorline		" Highlight the screen line of the cursor
