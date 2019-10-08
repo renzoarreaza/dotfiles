@@ -108,7 +108,7 @@ nnoremap k gk
 "##########
 " Folding
 "##########
-set foldmethod=indent   
+setlocal foldmethod=indent   
 autocmd Filetype c setlocal foldmethod=syntax " syntax folding for C files 
 set foldnestmax=10 
 set nofoldenable
