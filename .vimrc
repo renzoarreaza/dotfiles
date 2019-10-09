@@ -30,7 +30,7 @@ set cursorline		" Highlight the screen line of the cursor
     "For using in graphical window, add parameters guibg=darkred guifg=white
 "nnoremap H :set cursorline! cursorcolumn!<CR>
 
-set tabstop=4 shiftwidth=4 softtabstop=4  " number of visual spaces per TABs
+setlocal tabstop=4 shiftwidth=4 softtabstop=4  " number of visual spaces per TABs
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
 
 imap jj <Esc>		" use jj to exit insert mode
@@ -39,27 +39,24 @@ nmap :Q :q
 nmap :WQ :wq
 set wildmenu            " visual autocomplete for command menu
 
-"#############
-" Statusline
-"#############
+" # Statusline
 set laststatus=2        	" Show _always_ the statusline
-" Creating colorschemes
+" ## Statusline colors
 highlight h_white ctermbg=15 ctermfg=0  
 highlight h_cyan ctermbg=30 ctermfg=0  
-
-
 if $TERM ==? 'xterm'
 	" Simple colors
-	highlight h_blue cterm=reverse ctermbg=4 ctermfg=15
-	highlight h_d_blue ctermbg=4 ctermfg=15
-	highlight h_red ctermbg=1 ctermfg=0
+	highlight h_color1 cterm=reverse ctermbg=4 ctermfg=15
+	highlight h_color2 ctermbg=4 ctermfg=15
+	highlight h_warning ctermbg=1 ctermfg=0
 else " xterm-256color
 	" Default 
-	highlight h_blue ctermbg=39 ctermfg=15  
-	highlight h_d_blue ctermbg=25 ctermfg=15 
-	highlight h_red ctermbg=196 ctermfg=0  
+	highlight h_color1 ctermbg=39 ctermfg=15  
+	highlight h_color2 ctermbg=25 ctermfg=15 
+	highlight h_warning ctermbg=196 ctermfg=0  
 endif
 
+" tab line colors
 " :hi TabLineFill ctermfg=LightGreen ctermbg=DarkGreen
 " :hi TabLine ctermfg=Blue ctermbg=Yellow
 " :hi TabLineSel ctermfg=Red ctermbg=Yellow
@@ -71,25 +68,25 @@ endif
 " Statusline format
 set statusline=
 "" set statusline+=[%n] 		    " buffer number
-set statusline+=%#h_red#
+set statusline+=%#h_warning#
 set statusline+=%m 		        " modified flag
-set statusline+=%#h_d_blue#
+set statusline+=%#h_color2#
 set statusline+=\ [%l:%c]\ 	    "line and column number
-set statusline+=%#h_red#
+set statusline+=%#h_warning#
 set statusline+=%r		        "read only flag
-set statusline+=%#h_blue#\ 
+set statusline+=%#h_color1#\ 
 set statusline+=<<\ 		
 set statusline+=%-40.40(%F\ >>%)%< 		" F: full path to file in buffer, <: where to truncate if line is too long, 
 ""set statusline+=%F\ >>		            " F: full path to file in buffer
 ""set statusline+=%#h_cyan#		
 set statusline+=%= 			    " =: separation between left and right aligned items
-set statusline+=%#h_d_blue#
+set statusline+=%#h_color2#
 set statusline+=\ (%3P)\        " Percentage through file of displayed window.
-set statusline+=%#h_blue#
+set statusline+=%#h_color1#
 set statusline+=%y              " y: type of file in buffer e.g [python], [javascript] or [vim] 
-set statusline+=%#h_d_blue#
+set statusline+=%#h_color2#
 set statusline+=[%{&ff}]        " ff: file format e.g [unix] or [dos]
-set statusline+=%#h_blue#
+set statusline+=%#h_color1#
 set statusline+=[%{&fenc}]      " fenc: file encoding e.g [utf-8]
 ""set statusline+=%-25.25(%y[%{&ff}][%{&fenc}]%) 	" y: type of file in buffer e.g [vim], ff: file format e.g [unix] or [dos], fenc: file encoding e.g [utf-8]
 ""http://vimdoc.sourceforge.net/htmldoc/options.html#'statusline'
