@@ -5,6 +5,7 @@ for file in $config_files
 do
 	ln -s -f $PWD/$file $HOME/
 done
+
 if [ "$TERM" != "xterm-256color" ]
 then
 	echo 'export TERM="xterm-256color"' >> ~/.bashrc
