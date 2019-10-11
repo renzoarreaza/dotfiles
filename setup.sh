@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# creating syslinks of config files to user home directory
+# creating syslinks of config files to user's home directory
 config_files="$(ls -aF | grep -oE ".(vim|tmux).*")"
 for file in $config_files
 do
