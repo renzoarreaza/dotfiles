@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# creating syslinks of config files to user home directory
 config_files="$(ls -aF | grep -oE ".(vim|tmux).*")"
 for file in $config_files
 do
@@ -9,6 +10,7 @@ done
 #tmux configuration expects $TERM to be set to "xterm-256color" outside of tmux
 if [ "$TERM" != "xterm-256color" ]
 then
+	# $SHELL has the user's default shell
 	if [[ "$SHELL" == *"bash"* ]]
 	then
 		echo 'export TERM="xterm-256color"' >> ~/.bashrc
