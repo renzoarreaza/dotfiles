@@ -49,7 +49,11 @@ imap jj <Esc>		" use jj to exit insert mode
 nmap :W :w
 nmap :Q :q
 nmap :WQ :wq
-set wildmenu            " visual autocomplete for command menu
+set wildmenu		" visual autocomplete for command menu
+set splitright 		" vsplit opens file on the right
+set splitbelow 		" split opens file on the bottom
+
+
 
 """"""""""""""""""""""""""""""""""
 " Statusline, Tabline, VertSplit "
@@ -77,9 +81,12 @@ highlight! link TabLineFill h_color1
 
 " set color split line
 " set fillchars=vert:┃ " for vsplits
-set fillchars=vert:\ 
+set fillchars=
+" set fillchars+=vert:\ 
+" hi! link VertSplit h_color2
+set fillchars+=vert:│
+hi! VertSplit cterm=NONE				 
 set fillchars+=fold:· " for folds
-hi! link VertSplit h_color2
 
 " Statusline format
 set statusline=
