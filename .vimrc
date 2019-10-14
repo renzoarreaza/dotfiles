@@ -1,9 +1,22 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" __      __ _            
+" \ \    / /(_)           
+"  \ \  / /  _  _ __ ___  
+"   \ \/ /  | || '_ ` _ \ 
+"    \  /   | || | | | | |
+"     \/    |_||_| |_| |_|
+"
+"	https://github.com/renzoarreaza/dotfiles
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Usefull links
 " http://vimdoc.sourceforge.net/htmldoc/options.html
 " https://devhints.io/vimscript
 " https://jonasjacek.github.io/colors/
-"##########
+
+"""""""""""
 " Visuals
-"##########
+"""""""""""
 set showmatch			" highlight matching [{()}]
 syntax on 			" enable syntax highlighting
 set number relativenumber       " setting hybrid line numbers
@@ -103,9 +116,9 @@ set incsearch           " search as characters are entered
 nnoremap j gj
 nnoremap k gk
 
-"##########
+"""""""""""
 " Folding
-"##########
+"""""""""""
 setlocal foldmethod=indent   
 autocmd Filetype c setlocal foldmethod=syntax " syntax folding for C files 
 set foldnestmax=10 
