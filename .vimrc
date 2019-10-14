@@ -10,8 +10,8 @@
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Usefull links
-" http://vimdoc.sourceforge.net/htmldoc/options.html
-" https://devhints.io/vimscript
+" http://vimdoc.sourceforge.net/htmldoc/options.html " web version of :help documentation
+" https://devhints.io/vimscript " vim scripting cheatsheet
 " https://jonasjacek.github.io/colors/
 
 """""""""""
@@ -33,7 +33,6 @@ nnoremap <leader>* 2<c-w>w:set noscb<cr>:q<cr>:set noscb<cr>
 " use \m to toggle mouse between a (all) and desabled
 map <leader>m <ESC>:exec &mouse!=""? "set mouse=" : "set mouse=a"<CR>
 
-
 colorscheme peachpuff	" picking a colorscheme for syntax
 set cursorline		" Highlight the screen line of the cursor
 "hi CursorLine term=bold cterm=bold guibg=Grey40 	" change cursorline from underline to highlight
@@ -52,14 +51,16 @@ nmap :Q :q
 nmap :WQ :wq
 set wildmenu            " visual autocomplete for command menu
 
-" # Statusline
+""""""""""""""""""""""""""""""""""
+" Statusline, Tabline, VertSplit "
+""""""""""""""""""""""""""""""""""
 set laststatus=2        	" Show _always_ the statusline
 " ## Statusline colors
 highlight h_white ctermbg=15 ctermfg=0  
 highlight h_cyan ctermbg=30 ctermfg=0  
 if $TERM ==? 'xterm'
 	" Simple colors
-	highlight h_color1 cterm=reverse ctermbg=4 ctermfg=15
+	highlight h_color1 ctermbg=15 ctermfg=4
 	highlight h_color2 ctermbg=4 ctermfg=15
 	highlight h_warning ctermbg=1 ctermfg=0
 else " xterm-256color
@@ -69,24 +70,20 @@ else " xterm-256color
 	highlight h_warning ctermbg=196 ctermfg=0  
 endif
 
-" tab line colors
-" :hi TabLineFill ctermfg=LightGreen ctermbg=DarkGreen
-" :hi TabLine ctermfg=Blue ctermbg=Yellow
-" :hi TabLineSel ctermfg=Red ctermbg=Yellow
-" TabLineSel - is the current (so to say) active tab label.
-" TabLine - are the labels which are not currently active.
-" TabLineFill - is the remaining of the tabline where there is no labels (background).
+" highlight TabLineSel ctermfg=15 ctermbg=0
+highlight! link TabLineSel h_color2
+highlight! link TabLine h_color1
+highlight! link TabLineFill h_color1
 
-" " set color split line
+" set color split line
 " set fillchars=vert:┃ " for vsplits
-" set fillchars+=fold:· " for folds
-" hi VertSplit guifg=#F08080
-" " Directory color
-" hi Directory guifg=#F08080
+set fillchars=vert:\ 
+set fillchars+=fold:· " for folds
+hi! link VertSplit h_color2
 
 " Statusline format
 set statusline=
-"" set statusline+=[%n] 		    " buffer number
+" set statusline+=[%n] 		    " buffer number
 set statusline+=%#h_warning#
 set statusline+=%m 		        " modified flag
 set statusline+=%#h_color2#
@@ -97,7 +94,6 @@ set statusline+=%#h_color1#\
 set statusline+=<<\ 		
 set statusline+=%-40.40(%F\ >>%)%< 		" F: full path to file in buffer, <: where to truncate if line is too long, 
 ""set statusline+=%F\ >>		            " F: full path to file in buffer
-""set statusline+=%#h_cyan#		
 set statusline+=%= 			    " =: separation between left and right aligned items
 set statusline+=%#h_color2#
 set statusline+=\ (%3P)\        " Percentage through file of displayed window.
@@ -123,7 +119,7 @@ nnoremap j gj
 nnoremap k gk
 
 """""""""""
-" Folding
+" Folding "
 """""""""""
 setlocal foldmethod=indent   
 autocmd Filetype c setlocal foldmethod=syntax " syntax folding for C files 
