@@ -1,10 +1,10 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" __      __ _            
-" \ \    / /(_)           
-"  \ \  / /  _  _ __ ___  
-"   \ \/ /  | || '_ ` _ \ 
-"    \  /   | || | | | | |
-"     \/    |_||_| |_| |_|
+"	__      __ _            
+" 	\ \    / /(_)           
+" 	 \ \  / /  _  _ __ ___  
+" 	  \ \/ /  | || '_ ` _ \ 
+" 	   \  /   | || | | | | |
+" 	    \/    |_||_| |_| |_|
 "
 "	https://github.com/renzoarreaza/dotfiles
 "
@@ -77,6 +77,12 @@ endif
 " TabLine - are the labels which are not currently active.
 " TabLineFill - is the remaining of the tabline where there is no labels (background).
 
+" " set color split line
+" set fillchars=vert:┃ " for vsplits
+" set fillchars+=fold:· " for folds
+" hi VertSplit guifg=#F08080
+" " Directory color
+" hi Directory guifg=#F08080
 
 " Statusline format
 set statusline=
