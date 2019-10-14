@@ -80,8 +80,8 @@ highlight! link TabLine h_color1
 highlight! link TabLineFill h_color1
 
 " set color split line
-" set fillchars=vert:┃ " for vsplits
 set fillchars=
+" set fillchars+=vert:┃ " for vsplits
 " set fillchars+=vert:\ 
 " hi! link VertSplit h_color2
 set fillchars+=vert:│
