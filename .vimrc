@@ -52,10 +52,15 @@ autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2 " java
 """"""""""""
 " Mappings "
 """"""""""""
+
 " use \& to create split view with currently open file and enable scrollbind
-nnoremap <leader>& :vs<cr>:set scb<cr>2<c-w>w<c-f>:set scb<cr>1<c-w>w
+if &splitright ==# "splitright"
+	nnoremap <leader>& :vs<cr>2<c-w>w<c-f>:set scb<cr>1<c-w>w:set scb<cr> 
+elseif &splitright ==# "nosplitright"
+	nnoremap <leader>& :vs<cr>:set scb<cr>2<c-w>w<c-f>:set scb<cr>1<c-w>w 
+endif
 " use \* to close split on the right and disable scrollbind 
-nnoremap <leader>* 2<c-w>w:set noscb<cr>:q<cr>:set noscb<cr>
+nnoremap <leader>* 2<c-w>w:set noscb<cr>:q<cr>:set noscb<cr> 
 " use \m to toggle mouse between all and disabled
 map <leader>m <ESC>:exec &mouse!=""? "set mouse=" : "set mouse=a"<CR>
 " use jj to exit insert mode
