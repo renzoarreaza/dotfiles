@@ -10,9 +10,9 @@
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Usefull links
-" http://vimdoc.sourceforge.net/htmldoc/options.html " web version of :help documentation
-" https://devhints.io/vimscript " vim scripting cheatsheet
-" https://jonasjacek.github.io/colors/
+" http://vimdoc.sourceforge.net/htmldoc/options.html 	" web version of :help documentation
+" https://devhints.io/vimscript 			" vim scripting cheatsheet
+" https://jonasjacek.github.io/colors/ 			" 256 colors
 
 """""""""""
 " Visuals
