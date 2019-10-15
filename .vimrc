@@ -85,10 +85,7 @@ nnoremap <C-@> zR	" unfold all (Ctrl-<Space>)
 """"""""""""""""""""""""""""""""""
 " Statusline, Tabline, VertSplit "
 """"""""""""""""""""""""""""""""""
-set laststatus=2        	" Show _always_ the statusline
-" ## Statusline colors
-highlight h_white ctermbg=15 ctermfg=0  
-highlight h_cyan ctermbg=30 ctermfg=0  
+" colors used in status- and tabline
 if $TERM ==? 'xterm'
 	" Simple colors
 	highlight h_color1 ctermbg=15 ctermfg=4
@@ -112,10 +109,10 @@ set fillchars=
 " set fillchars+=vert:\ 
 " hi! link VertSplit h_color2
 set fillchars+=vert:│
-hi! VertSplit cterm=NONE				 
+highlight! VertSplit cterm=NONE				 
 set fillchars+=fold:· " for folds
 
-" Statusline format
+set laststatus=2        	" always show statusline
 set statusline=
 " set statusline+=[%n] 		    " buffer number
 set statusline+=%#h_warning#
