@@ -15,25 +15,19 @@
 " https://jonasjacek.github.io/colors/ 			" 256 colors
 
 """""""""""
-" Visuals
+" Options "
 """""""""""
-set showmatch			" highlight matching [{()}]
 syntax on 			" enable syntax highlighting
-set number relativenumber       " setting hybrid line numbers
-augroup numbertoggle            " auto-toggle between hybrid and absolute line numbers in command and insert modes respectively
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-augroup END
-
-" use \& to create split view with currently open file and enable scrollbind
-nnoremap <leader>& :vs<cr>:set scb<cr>2<c-w>w<c-f>:set scb<cr>1<c-w>w
-" use \* to close split on the right and disable scrollbind 
-nnoremap <leader>* 2<c-w>w:set noscb<cr>:q<cr>:set noscb<cr>
-" use \m to toggle mouse between all and disabled
-map <leader>m <ESC>:exec &mouse!=""? "set mouse=" : "set mouse=a"<CR>
-
 colorscheme peachpuff	" picking a colorscheme for syntax
+set showmatch			" highlight matching [{()}]
+set wildmenu		" visual autocomplete for command menu
+set splitright 		" vsplit opens file on the right
+set splitbelow 		" split opens file on the bottom
+" Use case insensitive search, except when using capital letters
+set ignorecase		" use case insensitie search
+set smartcase		" case sensitive when using capital letters
+set incsearch       " search as characters are entered
+" set hlsearch            " highlight matches
 set cursorline		" Highlight the screen line of the cursor
 "hi CursorLine term=bold cterm=bold guibg=Grey40 	" change cursorline from underline to highlight
 "hi CursorLine   cterm=NONE ctermbg=darkgray
@@ -42,17 +36,50 @@ set cursorline		" Highlight the screen line of the cursor
     "For using in graphical window, add parameters guibg=darkred guifg=white
 "nnoremap H :set cursorline! cursorcolumn!<CR>
 
-setlocal tabstop=4 shiftwidth=4 softtabstop=4  " number of visual spaces per TABs
-autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
+" line numbers
+set number relativenumber       " setting hybrid line numbers
+augroup numbertoggle            " auto-toggle between hybrid and absolute line numbers in command and insert modes respectively
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
 
-imap jj <Esc>		" use jj to exit insert mode
+" indentation
+setlocal tabstop=4 shiftwidth=4 softtabstop=4 " default 
+autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2 " javascript
+
+
+""""""""""""
+" Mappings "
+""""""""""""
+" use \& to create split view with currently open file and enable scrollbind
+nnoremap <leader>& :vs<cr>:set scb<cr>2<c-w>w<c-f>:set scb<cr>1<c-w>w
+" use \* to close split on the right and disable scrollbind 
+nnoremap <leader>* 2<c-w>w:set noscb<cr>:q<cr>:set noscb<cr>
+" use \m to toggle mouse between all and disabled
+map <leader>m <ESC>:exec &mouse!=""? "set mouse=" : "set mouse=a"<CR>
+" use jj to exit insert mode
+imap jj <Esc>		
 nmap :W :w
 nmap :Q :q
 nmap :WQ :wq
-set wildmenu		" visual autocomplete for command menu
-set splitright 		" vsplit opens file on the right
-set splitbelow 		" split opens file on the bottom
+" move vertically by visual line (usefull for wrapped lines)
+nnoremap j gj
+nnoremap k gk
+" turn off search highlight
+" nnoremap <leader><space> :nohlsearch<CR>
+ 
 
+"""""""""""
+" Folding "
+"""""""""""
+setlocal foldmethod=indent   
+autocmd Filetype c setlocal foldmethod=syntax " syntax folding for C files 
+set foldnestmax=10 
+set nofoldenable
+set foldlevel=2
+nnoremap <space> za	" space open/closes folds
+nnoremap <C-@> zR	" unfold all (Ctrl-<Space>)
 
 
 """"""""""""""""""""""""""""""""""
@@ -113,25 +140,4 @@ set statusline+=[%{&fenc}]      " fenc: file encoding e.g [utf-8]
 ""set statusline+=%-25.25(%y[%{&ff}][%{&fenc}]%) 	" y: type of file in buffer e.g [vim], ff: file format e.g [unix] or [dos], fenc: file encoding e.g [utf-8]
 ""http://vimdoc.sourceforge.net/htmldoc/options.html#'statusline'
 
-" Use case insensitive search, except when using capital letters
-set ignorecase
-set smartcase
-set incsearch           " search as characters are entered
-" set hlsearch            " highlight matches
-" turn off search highlight
-" nnoremap <leader><space> :nohlsearch<CR>
- 
-" move vertically by visual line (usefull for wrapped lines)
-nnoremap j gj
-nnoremap k gk
 
-"""""""""""
-" Folding "
-"""""""""""
-setlocal foldmethod=indent   
-autocmd Filetype c setlocal foldmethod=syntax " syntax folding for C files 
-set foldnestmax=10 
-set nofoldenable
-set foldlevel=2
-nnoremap <space> za	" space open/closes folds
-nnoremap <C-@> zR	" unfold all (Ctrl-<Space>)
