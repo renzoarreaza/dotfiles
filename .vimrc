@@ -30,7 +30,7 @@ augroup END
 nnoremap <leader>& :vs<cr>:set scb<cr>2<c-w>w<c-f>:set scb<cr>1<c-w>w
 " use \* to close split on the right and disable scrollbind 
 nnoremap <leader>* 2<c-w>w:set noscb<cr>:q<cr>:set noscb<cr>
-" use \m to toggle mouse between a (all) and desabled
+" use \m to toggle mouse between all and disabled
 map <leader>m <ESC>:exec &mouse!=""? "set mouse=" : "set mouse=a"<CR>
 
 colorscheme peachpuff	" picking a colorscheme for syntax
