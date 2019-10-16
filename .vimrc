@@ -120,7 +120,7 @@ set statusline=
 set statusline+=%#h_warning#
 set statusline+=%m 		        " modified flag
 set statusline+=%#h_color2#
-set statusline+=%{StatuslineGit()}
+set statusline+=⎇\ %{StatuslineGit()}
 set statusline+=%#h_warning#
 set statusline+=%r		        "read only flag
 set statusline+=%#h_color1#\ 
@@ -129,8 +129,8 @@ set statusline+=%-40.40(%F\ >>%)%< 		" F: full path to file in buffer, <: where 
 ""set statusline+=%F\ >>		            " F: full path to file in buffer
 set statusline+=%= 			    " =: separation between left and right aligned items
 set statusline+=%#h_color2#
-set statusline+=\▏\☰\ %l:%c
-set statusline+= %p%% 
+set statusline+=\ \☰\ %l:%c
+set statusline+=\ %p%%\ 
 "set statusline+=\ [%l:%c]\ 	    "line and column number
 "set statusline+=\ (%3P)\        " Percentage through file of displayed window.
 set statusline+=%#h_color1#
@@ -141,11 +141,12 @@ set statusline+=%#h_color1#
 set statusline+=[%{&fenc}]      " fenc: file encoding e.g [utf-8]
 ""set statusline+=%-25.25(%y[%{&ff}][%{&fenc}]%) 	" y: type of file in buffer e.g [vim], ff: file format e.g [unix] or [dos], fenc: file encoding e.g [utf-8]
 ""http://vimdoc.sourceforge.net/htmldoc/options.html#'statusline'
+""https://github.com/ryanoasis/powerline-extra-symbols
 
 
 function! StatuslineGit()
   let l:branchname = GitBranch()
-  return strlen(l:branchname) > 0?'▏'.l:branchname.' ':''
+  return strlen(l:branchname) > 0?' '.l:branchname.' ':''
 endfunction
 
 function! GitBranch()
