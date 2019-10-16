@@ -120,7 +120,7 @@ set statusline=
 set statusline+=%#h_warning#
 set statusline+=%m 		        " modified flag
 set statusline+=%#h_color2#
-set statusline+=\ [%l:%c]\ 	    "line and column number
+set statusline+=%{StatuslineGit()}
 set statusline+=%#h_warning#
 set statusline+=%r		        "read only flag
 set statusline+=%#h_color1#\ 
@@ -129,7 +129,10 @@ set statusline+=%-40.40(%F\ >>%)%< 		" F: full path to file in buffer, <: where 
 ""set statusline+=%F\ >>		            " F: full path to file in buffer
 set statusline+=%= 			    " =: separation between left and right aligned items
 set statusline+=%#h_color2#
-set statusline+=\ (%3P)\        " Percentage through file of displayed window.
+set statusline+=\▏\☰\ %l:%c
+set statusline+= %p%% 
+"set statusline+=\ [%l:%c]\ 	    "line and column number
+"set statusline+=\ (%3P)\        " Percentage through file of displayed window.
 set statusline+=%#h_color1#
 set statusline+=%y              " y: type of file in buffer e.g [python], [javascript] or [vim] 
 set statusline+=%#h_color2#
@@ -140,3 +143,11 @@ set statusline+=[%{&fenc}]      " fenc: file encoding e.g [utf-8]
 ""http://vimdoc.sourceforge.net/htmldoc/options.html#'statusline'
 
 
+function! StatuslineGit()
+  let l:branchname = GitBranch()
+  return strlen(l:branchname) > 0?'▏'.l:branchname.' ':''
+endfunction
+
+function! GitBranch()
+  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+endfunction
