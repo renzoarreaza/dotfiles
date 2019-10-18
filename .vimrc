@@ -108,6 +108,14 @@ highlight! link TabLineSel h_color2
 highlight! link TabLine h_color1
 highlight! link TabLineFill h_color1
 
+let g:lightline = {
+   \ 'colorscheme': 'wombat',
+   \ 'separator': {'left': "\u25B6", 'right': ''},
+   \ 'subseparator': { 'left': '', 'right': ''}
+   \ }
+
+
+
 " set color split line
 highlight! VertSplit cterm=NONE				 
 set fillchars=
