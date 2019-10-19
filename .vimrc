@@ -14,6 +14,11 @@
 " https://devhints.io/vimscript 			" vim scripting cheatsheet
 " https://jonasjacek.github.io/colors/ 			" 256 colors
 
+call plug#begin('~/.vim/plugged')
+Plug 'davidhalter/jedi-vim'
+call plug#end()
+
+
 """""""""""
 " Options "
 """""""""""

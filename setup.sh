@@ -1,11 +1,21 @@
 #!/bin/bash
 
 # creating syslinks of config files to user's home directory
-config_files="$(ls -aF | grep -oE ".(vim|tmux).*")"
+config_files="$(ls -aF | grep -oE ".(vimrc|tmux).*")"
 for file in $config_files
 do
 	ln -s -f $PWD/$file $HOME/
 done
+
+# Get latest plug.vim 
+wget https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+# adding plug.vim to autoload
+mkdir ~/.vim/autoload -p
+ln -s -f $PWD/plug.vim $HOME/.vim/autoload/
+
+mkdir ~/.vim/plugged -p
+
 
 #tmux configuration expects $TERM to be set to "xterm-256color" outside of tmux
 if [ "$TERM" != "xterm-256color" ]
