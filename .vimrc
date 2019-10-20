@@ -15,7 +15,8 @@
 " https://jonasjacek.github.io/colors/ 			" 256 colors
 
 call plug#begin('~/.vim/plugged')
-Plug 'davidhalter/jedi-vim'
+"Plug 'davidhalter/jedi-vim'
+"Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 call plug#end()
 
 
