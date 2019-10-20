@@ -23,6 +23,7 @@ call plug#end()
 """""""""""
 " Options "
 """""""""""
+"set autoindent		" yet to try this option. perhaps only for python?
 syntax on 			" enable syntax highlighting
 colorscheme peachpuff	" picking a colorscheme for syntax
 set showmatch			" highlight matching [{()}]
@@ -54,6 +55,8 @@ augroup END
 setlocal tabstop=4 shiftwidth=4 softtabstop=4 " default 
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2 " javascript
 
+" flagging unnecessary whitespace
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
 """"""""""""
 " Mappings "
