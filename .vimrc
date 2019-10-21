@@ -56,11 +56,15 @@ setlocal tabstop=4 shiftwidth=4 softtabstop=4 " default
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2 " javascript
 
 " flagging unnecessary whitespace
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
 """"""""""""
 " Mappings "
 """"""""""""
+
+" redraw line at 1/4 way down from top of window " similar to z. and z<Enter>
+let s:test = ((line('w$')-line('w0'))/4)
+execute "nnoremap z/ z\<cr>" . s:test . "\<c-y>"
 
 " use \& to create split view with currently open file and enable scrollbind
 if &splitright ==# "splitright"
