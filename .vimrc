@@ -63,6 +63,7 @@ autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 """"""""""""
 
 " redraw line at 1/4 way down from top of window " similar to z. and z<Enter>
+" not working propely
 let s:test = ((line('w$')-line('w0'))/4)
 execute "nnoremap z/ z\<cr>" . s:test . "\<c-y>"
 
