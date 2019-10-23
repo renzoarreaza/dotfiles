@@ -14,8 +14,10 @@
 " https://devhints.io/vimscript 			" vim scripting cheatsheet
 " https://jonasjacek.github.io/colors/ 			" 256 colors
 
-""""" include plugins file below "set by the setup.sh script
-"""""
+source config.vim
+if enable_plugins == 'true'
+	source plugins.vim
+endif 
 
 """""""""""
 " Options "

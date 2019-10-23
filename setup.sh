@@ -9,14 +9,16 @@ function plugins_setup {
 	ln -s -f $PWD/plug.vim $HOME/.vim/autoload/
 	mkdir ~/.vim/plugged -p
 	# add plugins.vim to .vimrc
-	sed -i "18isource $PWD/plugins.vim" ./.vimrc 
+#	sed -i "18isource $PWD/plugins.vim" ./.vimrc 
+	echo 'let enable_plugins="true"' > ./config.vim
+	echo "run :PlugInstall when opening vim after this setup"
 }
 
 
 read -p "Setup plugins (y/n)?" choice
 case "$choice" in 
 	y|Y ) plugins_setup;;
-	n|N ) echo ;;
+	n|N ) echo 'let enable_plugins="false"' > ./config.vim ;;
 	* ) echo "invalid";;
 esac
 
