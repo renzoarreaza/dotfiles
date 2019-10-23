@@ -58,7 +58,8 @@ augroup END
 
 " indentation
 setlocal tabstop=4 shiftwidth=4 softtabstop=4 " default 
-autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2 " javascript
+autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2 
+autocmd Filetype yaml setlocal tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab 
 
 " flagging unnecessary whitespace
 "autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
