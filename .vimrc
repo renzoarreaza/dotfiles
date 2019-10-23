@@ -14,10 +14,16 @@
 " https://devhints.io/vimscript 			" vim scripting cheatsheet
 " https://jonasjacek.github.io/colors/ 			" 256 colors
 
-source ~/.vim/config.vim
-if enable_plugins == 'true'
-	source ~/.vim/plugins.vim
-endif 
+if filereadable(expand("~/.vimrc.local"))
+	source ~/.vimrc.local
+	if enable_plugins == 'true'
+		call plug#begin('~/.vim/plugged')
+		"Plug 'davidhalter/jedi-vim'
+		Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+		call plug#end()
+	endif 
+endif
+
 
 """""""""""
 " Options "
