@@ -59,10 +59,12 @@ autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2 " java
 " Mappings "
 """"""""""""
 
+nnoremap z/ :call Redraw()<cr>
 " redraw line at 1/4 way down from top of window " similar to z. and z<Enter>
-" not working propely
-let of = ((line('w$')-line('w0'))/4)
-execute "nnoremap z/ z\<cr>" . of . "\<c-y>"
+function! Redraw()
+	let of = ((line('w$')-line('w0'))/4)
+	execute "normal z\<cr>" . of . "\<c-y>"
+endfunction
 
 " use \& to create split view with currently open file and enable scrollbind
 if &splitright ==# "splitright"
@@ -70,10 +72,13 @@ if &splitright ==# "splitright"
 elseif &splitright ==# "nosplitright"
 	nnoremap <leader>& :vs<cr>:set scb<cr>2<c-w>w<c-f>:set scb<cr>1<c-w>w 
 endif
+
 " use \* to close split on the right and disable scrollbind 
 nnoremap <leader>* 2<c-w>w:set noscb<cr>:q<cr>:set noscb<cr> 
+j
 " use \m to toggle mouse between all and disabled
 map <leader>m <ESC>:exec &mouse!=""? "set mouse=" : "set mouse=a"<CR>
+
 " use jj to exit insert mode
 imap jj <Esc>		
 nmap :W :w
@@ -149,5 +154,4 @@ set statusline+=%#h_color1#
 set statusline+=[%{&fenc}]      " fenc: file encoding e.g [utf-8]
 ""set statusline+=%-25.25(%y[%{&ff}][%{&fenc}]%) 	" y: type of file in buffer e.g [vim], ff: file format e.g [unix] or [dos], fenc: file encoding e.g [utf-8]
 ""http://vimdoc.sourceforge.net/htmldoc/options.html#'statusline'
-
 
