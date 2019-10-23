@@ -14,9 +14,9 @@
 " https://devhints.io/vimscript 			" vim scripting cheatsheet
 " https://jonasjacek.github.io/colors/ 			" 256 colors
 
-source config.vim
+source ~/.vim/config.vim
 if enable_plugins == 'true'
-	source plugins.vim
+	source ~/.vim/plugins.vim
 endif 
 
 """""""""""
@@ -77,7 +77,7 @@ endif
 
 " use \* to close split on the right and disable scrollbind 
 nnoremap <leader>* 2<c-w>w:set noscb<cr>:q<cr>:set noscb<cr> 
-j
+
 " use \m to toggle mouse between all and disabled
 map <leader>m <ESC>:exec &mouse!=""? "set mouse=" : "set mouse=a"<CR>
 

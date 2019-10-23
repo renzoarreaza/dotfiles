@@ -12,6 +12,7 @@ function plugins_setup {
 #	sed -i "18isource $PWD/plugins.vim" ./.vimrc 
 	echo 'let enable_plugins="true"' > ./config.vim
 	echo -e "\nrun :PlugInstall in vim after this setup"
+	ln -s -f $PWD/plugins.vim $HOME/.vim/
 }
 
 
@@ -21,7 +22,7 @@ case "$choice" in
 	n|N ) echo 'let enable_plugins="false"' > ./config.vim && echo "";;
 	* ) echo "invalid";;
 esac
-
+ln -s -f $PWD/config.vim $HOME/.vim/	
 
 # creating syslinks of config files to user's home directory
 config_files="$(ls -aF | grep -oE ".(vimrc|tmux).*")"
