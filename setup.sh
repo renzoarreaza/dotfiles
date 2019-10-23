@@ -3,7 +3,7 @@
 
 function plugins_setup {
 	# Get latest plug.vim 
-	wget https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim -O plug.vim
+	wget https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim -O plug.vim &> /dev/null
 	# adding plug.vim to autoload
 	mkdir ~/.vim/autoload -p
 	ln -s -f $PWD/plug.vim $HOME/.vim/autoload/
@@ -11,14 +11,14 @@ function plugins_setup {
 	# add plugins.vim to .vimrc
 #	sed -i "18isource $PWD/plugins.vim" ./.vimrc 
 	echo 'let enable_plugins="true"' > ./config.vim
-	echo "run :PlugInstall when opening vim after this setup"
+	echo -e "\nrun :PlugInstall in vim after this setup"
 }
 
 
 read -p "Setup plugins (y/n)?" choice
 case "$choice" in 
 	y|Y ) plugins_setup;;
-	n|N ) echo 'let enable_plugins="false"' > ./config.vim ;;
+	n|N ) echo 'let enable_plugins="false"' > ./config.vim && echo "";;
 	* ) echo "invalid";;
 esac
 
@@ -53,3 +53,4 @@ then
 		echo 'set $TERM to "xterm-256color"'	
 	fi
 fi
+echo "Done!"
