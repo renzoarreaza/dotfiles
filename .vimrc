@@ -23,8 +23,8 @@ if filereadable(expand("~/.vimrc.local"))
 		"
 		
 		Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-		"option below is a comma separated string, i.e: let g:pymode_lint_ignore="E501,W601"
-		let g:pymode_lint_ignore="W191"
+		"option below is a list of strings, i.e: let g:pymode_lint_ignore=["E501","W601"]
+		let g:pymode_lint_ignore=["W191"]
 
 		call plug#end()
 	endif 
