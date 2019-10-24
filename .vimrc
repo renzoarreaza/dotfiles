@@ -18,8 +18,14 @@ if filereadable(expand("~/.vimrc.local"))
 	source ~/.vimrc.local
 	if enable_plugins == 'true'
 		call plug#begin('~/.vim/plugged')
+
 		"Plug 'davidhalter/jedi-vim'
+		"
+		
 		Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+		"option below is a comma separated string, i.e: let g:pep8_ignore="E501,W601"
+		let g:pep8_ignore="W191" 
+
 		call plug#end()
 	endif 
 endif
