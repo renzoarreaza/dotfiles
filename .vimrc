@@ -123,9 +123,18 @@ if $TERM ==? 'xterm'
 	highlight h_warning ctermbg=1 ctermfg=0
 else " xterm-256color
 	" Default 
-	highlight h_color1 ctermbg=39 ctermfg=15  
-	highlight h_color2 ctermbg=25 ctermfg=15 
-	highlight h_warning ctermbg=196 ctermfg=0  
+"	Blues
+	highlight h_color1 ctermbg=39 ctermfg=15	" light blue
+	highlight h_color2 ctermbg=25 ctermfg=15	" dark blue 
+	highlight h_warning ctermbg=196 ctermfg=0	" red 
+	" Grays
+"	highlight h_color1 ctermbg=243 ctermfg=15	" light gray 
+"	highlight h_color2 ctermbg=238 ctermfg=15 	" dark gray
+"	highlight h_warning ctermbg=160 ctermfg=0 	" softer red 
+	" 
+"	highlight h_color1 ctermbg=184 ctermfg=15  
+"	highlight h_color2 ctermbg=107 ctermfg=15 
+"	highlight h_warning ctermbg=160 ctermfg=0  
 endif
 
 " highlight TabLineSel ctermfg=15 ctermbg=0
@@ -139,13 +148,14 @@ set fillchars=
 set fillchars+=vert:│
 set fillchars+=fold:· " for folds
 
+" statusline
 set laststatus=2        	" always show statusline
 set statusline=
 " set statusline+=[%n] 		    " buffer number
 set statusline+=%#h_warning#
 set statusline+=%m 		        " modified flag
 set statusline+=%#h_color2#
-set statusline+=\ [%l:%c]\ 	    "line and column number
+set statusline+=⎇\ %{StatuslineGit()}
 set statusline+=%#h_warning#
 set statusline+=%r		        "read only flag
 set statusline+=%#h_color1#\ 
@@ -154,13 +164,25 @@ set statusline+=%-40.40(%F\ >>%)%< 		" F: full path to file in buffer, <: where 
 ""set statusline+=%F\ >>		            " F: full path to file in buffer
 set statusline+=%= 			    " =: separation between left and right aligned items
 set statusline+=%#h_color2#
-set statusline+=\ (%3P)\        " Percentage through file of displayed window.
+set statusline+=\ \☰\ %l:%c
+set statusline+=\ %p%%\ 
+"set statusline+=\ [%l:%c]\ 	    "line and column number
+"set statusline+=\ (%3P)\        " Percentage through file of displayed window.
 set statusline+=%#h_color1#
 set statusline+=%y              " y: type of file in buffer e.g [python], [javascript] or [vim] 
-set statusline+=%#h_color2#
+"set statusline+=%#h_color2#
 set statusline+=[%{&ff}]        " ff: file format e.g [unix] or [dos]
 set statusline+=%#h_color1#
 set statusline+=[%{&fenc}]      " fenc: file encoding e.g [utf-8]
 ""set statusline+=%-25.25(%y[%{&ff}][%{&fenc}]%) 	" y: type of file in buffer e.g [vim], ff: file format e.g [unix] or [dos], fenc: file encoding e.g [utf-8]
 ""http://vimdoc.sourceforge.net/htmldoc/options.html#'statusline'
 
+
+function! StatuslineGit()
+  let l:branchname = GitBranch()
+  return strlen(l:branchname) > 0?' '.l:branchname.' ':''
+endfunction
+
+function! GitBranch()
+  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+endfunction
