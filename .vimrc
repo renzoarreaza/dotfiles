@@ -38,7 +38,7 @@ endif
 """""""""""
 syntax on 			" enable syntax highlighting
 colorscheme peachpuff	" picking a colorscheme for syntax
-"set backspace=indent,eol,start
+set backspace=indent,eol,start
 set showmatch			" highlight matching [{()}]
 set wildmenu		" visual autocomplete for command menu
 set splitright 		" vsplit opens file on the right
