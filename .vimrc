@@ -34,7 +34,6 @@ endif
 """""""""""
 " Options "
 """""""""""
-"set autoindent		" yet to try this option. perhaps only for python?
 syntax on 			" enable syntax highlighting
 colorscheme peachpuff	" picking a colorscheme for syntax
 set showmatch			" highlight matching [{()}]
@@ -45,8 +44,9 @@ set splitbelow 		" split opens file on the bottom
 set ignorecase		" use case insensitie search
 set smartcase		" case sensitive when using capital letters
 set incsearch       " search as characters are entered
-" set hlsearch            " highlight matches
-set cursorline		" Highlight the screen line of the cursor
+set cursorline		" Highlight the screen line of the cursor  # makes scrolling slow 
+"set autoindent		" yet to try this option. perhaps only for python?
+"set hlsearch       " highlight matches
 "hi CursorLine term=bold cterm=bold guibg=Grey40 	" change cursorline from underline to highlight
 "hi CursorLine   cterm=NONE ctermbg=darkgray
 "hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white
@@ -55,7 +55,7 @@ set cursorline		" Highlight the screen line of the cursor
 "nnoremap H :set cursorline! cursorcolumn!<CR>
 
 " line numbers
-set number relativenumber       " setting hybrid line numbers
+set number relativenumber       " setting hybrid line numbers  # makes scrolling slow
 augroup numbertoggle            " auto-toggle between hybrid and absolute line numbers in command and insert modes respectively
   autocmd!
   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
@@ -68,7 +68,7 @@ autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype yaml setlocal tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab 
 
 " flagging unnecessary whitespace
-"autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
 """"""""""""
 " Mappings "
@@ -161,8 +161,7 @@ set statusline=
 set statusline+=%#h_warning#
 set statusline+=%m 		        " modified flag
 set statusline+=%#h_color2#
-"set statusline+=⎇\ %{StatuslineGit()}		"u+2387    
-"set statusline+=%{StatuslineGit()}       "u+2387
+" set statusline+=⎇\ %{StatuslineGit()}		"u+2387   # slows down scrolling and introduces weird characters. The statusline is reloaded every time the cursor moves. that's why it's slow.  
 set statusline+=%#h_warning#
 set statusline+=%r		        "read only flag
 set statusline+=%#h_color1#\ 
