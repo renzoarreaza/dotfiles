@@ -130,9 +130,9 @@ if $TERM ==? 'xterm'
 else " xterm-256color
 	" Default 
 "	Blues
-	highlight h_color1 ctermbg=39 ctermfg=15	" light blue
+	highlight h_color1 ctermbg=39 ctermfg=0		" light blue
 	highlight h_color2 ctermbg=25 ctermfg=15	" dark blue 
-	highlight h_warning ctermbg=196 ctermfg=0	" red 
+	highlight h_warning ctermbg=196 ctermfg=15	" red 
 	" Grays
 "	highlight h_color1 ctermbg=243 ctermfg=15	" light gray 
 "	highlight h_color2 ctermbg=238 ctermfg=15 	" dark gray
