@@ -13,6 +13,8 @@
 " http://vimdoc.sourceforge.net/htmldoc/options.html 	" web version of :help documentation
 " https://devhints.io/vimscript 			" vim scripting cheatsheet
 " https://jonasjacek.github.io/colors/ 			" 256 colors
+" if scrolling is slow, it's most likely due to: https://github.com/vim/vim/issues/2584
+" update your vim installation or disable relative number and cursorline options
 
 if filereadable(expand("~/.vimrc.local"))
 	source ~/.vimrc.local
