@@ -71,6 +71,7 @@ autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype yaml setlocal tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab
 
 " flagging unnecessary whitespace
+highlight BadWhitespace ctermbg=red guibg=red
 autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
 """"""""""""
