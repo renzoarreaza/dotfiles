@@ -66,9 +66,9 @@ augroup numbertoggle            " auto-toggle between hybrid and absolute line n
 augroup END
 
 " indentation
-setlocal tabstop=4 shiftwidth=4 softtabstop=4 " default 
-autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2 
-autocmd Filetype yaml setlocal tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab 
+setlocal tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype yaml setlocal tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab
 
 " flagging unnecessary whitespace
 autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
@@ -76,7 +76,6 @@ autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 """"""""""""
 " Mappings "
 """"""""""""
-
 nnoremap z/ :call Redraw()<cr>
 " redraw line at 1/4 way down from top of window " similar to z. and z<Enter>
 function! Redraw()
@@ -85,9 +84,9 @@ function! Redraw()
 endfunction
 
 " use \& to create split view with currently open file and enable scrollbind
-if &splitright ==# "splitright"
+if &splitright ==? "splitright" || &splitright
 	nnoremap <leader>& :vs<cr>2<c-w>w<c-f>:set scb<cr>1<c-w>w:set scb<cr> 
-elseif &splitright ==# "nosplitright"
+elseif &splitright ==? "nosplitright" || &splitright
 	nnoremap <leader>& :vs<cr>:set scb<cr>2<c-w>w<c-f>:set scb<cr>1<c-w>w 
 endif
 
