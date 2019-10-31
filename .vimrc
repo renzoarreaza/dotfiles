@@ -117,8 +117,10 @@ autocmd Filetype c setlocal foldmethod=syntax " syntax folding for C files
 set foldnestmax=10 
 set nofoldenable
 set foldlevel=2
-nnoremap <space> za	" space open/closes folds
-nnoremap <C-@> zR	" unfold all (Ctrl-<Space>)
+" space open/closes folds
+nnoremap <space> za	
+" unfold all (Ctrl-<Space>)
+nnoremap <C-@> zR	
 
 
 """"""""""""""""""""""""""""""""""
@@ -133,9 +135,9 @@ if $TERM ==? 'xterm'
 else " xterm-256color
 	" Default 
 "	Blues
-	highlight h_color1 ctermbg=39 ctermfg=0		" light blue
-	highlight h_color2 ctermbg=25 ctermfg=15	" dark blue 
-	highlight h_warning ctermbg=196 ctermfg=15	" red 
+	highlight h_color1 ctermbg=39 ctermfg=16	"cterm=bold		" light blue
+	highlight h_color2 ctermbg=25 ctermfg=15			" dark blue 
+	highlight h_warning ctermbg=196 ctermfg=15			" red 
 	" Grays
 "	highlight h_color1 ctermbg=243 ctermfg=15	" light gray 
 "	highlight h_color2 ctermbg=238 ctermfg=15 	" dark gray
@@ -164,7 +166,7 @@ set statusline=
 set statusline+=%#h_warning#
 set statusline+=%m 		        " modified flag
 set statusline+=%#h_color2#
-set statusline+=⎇\ %{StatuslineGit()}		"u+2387   # slows down scrolling and introduces weird characters. The statusline is reloaded every time the cursor moves. that's why it's slow.  
+set statusline+=%{StatuslineGit()}		"u+2387   # slows down scrolling and introduces weird characters. The statusline is reloaded every time the cursor moves. that's why it's slow.  
 set statusline+=%#h_warning#
 set statusline+=%r		        "read only flag
 set statusline+=%#h_color1#\ 
@@ -175,36 +177,19 @@ set statusline+=%= 			    " =: separation between left and right aligned items
 set statusline+=%#h_color2#
 set statusline+=\ \☰\ %l:%c
 set statusline+=\ %p%%\ 
-"set statusline+=\ [%l:%c]\ 	    "line and column number
-"set statusline+=\ (%3P)\        " Percentage through file of displayed window.
 set statusline+=%#h_color1#
 set statusline+=%y              " y: type of file in buffer e.g [python], [javascript] or [vim] 
-"set statusline+=%#h_color2#
 set statusline+=[%{&ff}]        " ff: file format e.g [unix] or [dos]
-set statusline+=%#h_color1#
 set statusline+=[%{&fenc}]      " fenc: file encoding e.g [utf-8]
-""set statusline+=%-25.25(%y[%{&ff}][%{&fenc}]%) 	" y: type of file in buffer e.g [vim], ff: file format e.g [unix] or [dos], fenc: file encoding e.g [utf-8]
 ""http://vimdoc.sourceforge.net/htmldoc/options.html#'statusline'
 
-" in progress... still have to figure out how to have different statusline across multiple splits
-"function! GitBranch()
-"	let s:branchname = system("cd " . expand("%:p:h") . " ; " . "git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-"
-"endfunction
-"call GitBranch()
-"function! StatuslineGit()
-"  return strlen(s:branchname) > 0?' '.s:branchname.' ':''
-"endfunction
-"
-"autocmd TabEnter,BufEnter,FocusGained * call GitBranch()
+function! GitBranch()
+	let b:branchname = system("cd " . expand("%:p:h") . " ; " . "git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+endfunction
 
+function! StatuslineGit()
+  return strlen(b:branchname) > 0?' '.'⎇  '.b:branchname.' ':''
+endfunction
 
-" OLD. using as reference for creating above 
-"function! StatuslineGit()
-"  let l:branchname = GitBranch()
-"  return strlen(l:branchname) > 0?' '.l:branchname.' ':''
-"endfunction
-"
-"function! GitBranch()
-"  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-"endfunction
+autocmd TabEnter,BufEnter,FocusGained * call GitBranch()
+
