@@ -163,7 +163,7 @@ set statusline=
 set statusline+=%#h_warning#
 set statusline+=%m 		        " modified flag
 set statusline+=%#h_color2#
-"set statusline+=⎇\ %{StatuslineGit()}		"u+2387   # slows down scrolling and introduces weird characters. The statusline is reloaded every time the cursor moves. that's why it's slow.  
+set statusline+=⎇\ %{StatuslineGit()}		"u+2387   # slows down scrolling and introduces weird characters. The statusline is reloaded every time the cursor moves. that's why it's slow.  
 set statusline+=%#h_warning#
 set statusline+=%r		        "read only flag
 set statusline+=%#h_color1#\ 
@@ -185,21 +185,18 @@ set statusline+=[%{&fenc}]      " fenc: file encoding e.g [utf-8]
 ""set statusline+=%-25.25(%y[%{&ff}][%{&fenc}]%) 	" y: type of file in buffer e.g [vim], ff: file format e.g [unix] or [dos], fenc: file encoding e.g [utf-8]
 ""http://vimdoc.sourceforge.net/htmldoc/options.html#'statusline'
 
-" in progress...
+" in progress... still have to figure out how to have different statusline across multiple splits
+"function! GitBranch()
+"	let s:branchname = system("cd " . expand("%:p:h") . " ; " . "git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+"
+"endfunction
+"call GitBranch()
 "function! StatuslineGit()
 "  return strlen(s:branchname) > 0?' '.s:branchname.' ':''
 "endfunction
 "
-"function! GitBranch()
-"	let s:branchname = system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-"	" echo s:branchname
-"endfunction
-"
-""autocmd BufWrite GitBranch()
-""autocmd BufEnter call GitBranch()
-"autocmd FocusGained call GitBranch()
-"nnoremap <leader>( :call GitBranch()<cr> 
-":call GitBranch()
+"autocmd TabEnter,BufEnter,FocusGained * call GitBranch()
+
 
 " OLD. using as reference for creating above 
 "function! StatuslineGit()
