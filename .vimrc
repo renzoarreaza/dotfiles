@@ -48,7 +48,7 @@ set ignorecase		" use case insensitie search
 set smartcase		" case sensitive when using capital letters
 set incsearch       " search as characters are entered
 set cursorline		" Highlight the screen line of the cursor  # makes scrolling slow 
-"set autoindent		" yet to try this option. perhaps only for python?
+set autoindent		" yet to try this option. perhaps only for python?
 "set hlsearch       " highlight matches
 "hi CursorLine term=bold cterm=bold guibg=Grey40 	" change cursorline from underline to highlight
 "hi CursorLine   cterm=NONE ctermbg=darkgray
