@@ -36,6 +36,8 @@ endif
 """""""""""
 " Options "
 """""""""""
+set encoding=utf-8
+scriptencoding utf-8
 syntax on 			" enable syntax highlighting
 colorscheme peachpuff	" picking a colorscheme for syntax
 set backspace=indent,eol,start
