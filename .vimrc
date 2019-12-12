@@ -156,7 +156,7 @@ highlight! link TabLineFill h_color1
 " set color split line
 highlight! VertSplit cterm=NONE				 
 set fillchars=
-set fillchars+=vert:│
+set fillchars+=vert:│ " for vertical split
 set fillchars+=fold:· " for folds
 
 " statusline
