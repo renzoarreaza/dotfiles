@@ -60,8 +60,9 @@ set autoindent		" yet to try this option. perhaps only for python?
 "nnoremap H :set cursorline! cursorcolumn!<CR>
 
 " line numbers
-set number relativenumber       " setting hybrid line numbers  # makes scrolling slow
-augroup numbertoggle            " auto-toggle between hybrid and absolute line numbers in command and insert modes respectively
+set number 
+" relativenumber makes scrolling slow in certain versions
+augroup numbertoggle            " auto-toggle between hybrid and absolute line numbers in command and insert modes respectively 
   autocmd!
   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
