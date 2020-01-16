@@ -21,7 +21,6 @@ if filereadable(expand("~/.vimrc.local"))
 	source ~/.vimrc.local
 	if enable_plugins == 'true'
 		call plug#begin('~/.vim/plugged')
-
 		"Plug 'davidhalter/jedi-vim'
 		"
 		Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
@@ -71,7 +70,8 @@ augroup END
 " indentation
 setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Filetype yaml setlocal tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab
+autocmd Filetype yaml setlocal tabstop=4 softtabstop=0 shiftwidth=2 smarttab expandtab 
+autocmd Filetype tcl setlocal expandtab
 
 " flagging unnecessary whitespace
 highlight BadWhitespace ctermbg=red guibg=red
@@ -82,10 +82,29 @@ autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 """"""""""""
 nnoremap z/ :call Redraw()<cr>
 " redraw line at 1/4 way down from top of window " similar to z. and z<Enter>
+" doesn't work well when folded lines are present in current visible lines
 function! Redraw()
 	" improve with the use of line('.'), which returns the current line.
 	let of = ((line('w$')-line('w0'))/4)
 	execute "normal z\<cr>" . of . "\<c-y>"
+endfunction
+
+" work in progress
+function! RedrawTest()
+	let of = (((line('w$')-line('w0'))/4)+line('w0'))
+	let cl = line('.')
+	let diff = (cl - of)
+	echo diff
+	if (of < cl)
+		let diff = (cl - of)
+		execute "normal " . diff . "\<c-e>"
+		execute "normal :echo " . diff
+	endif
+	if (cl > of)
+		let diff = (of - cl)
+		execute "normal " . diff . "\<c-y>"
+		execute "normal :echo " . diff
+	endif	
 endfunction
 
 " use \& to create split view with currently open file and enable scrollbind
