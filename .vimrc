@@ -83,6 +83,7 @@ autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 nnoremap z/ :call Redraw()<cr>
 " redraw line at 1/4 way down from top of window " similar to z. and z<Enter>
 function! Redraw()
+	" improve with the use of line('.'), which returns the current line.
 	let of = ((line('w$')-line('w0'))/4)
 	execute "normal z\<cr>" . of . "\<c-y>"
 endfunction
