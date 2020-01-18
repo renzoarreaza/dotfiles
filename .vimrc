@@ -80,31 +80,16 @@ autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 """"""""""""
 " Mappings "
 """"""""""""
-nnoremap z/ :call Redraw()<cr>
+nnoremap <silent> z/ :call RedrawNew()<cr>
 " redraw line at 1/4 way down from top of window " similar to z. and z<Enter>
 " doesn't work well when folded lines are present in current visible lines
 function! Redraw()
-	" improve with the use of line('.'), which returns the current line.
 	let of = ((line('w$')-line('w0'))/4)
 	execute "normal z\<cr>" . of . "\<c-y>"
 endfunction
-
-" work in progress
-function! RedrawTest()
-	let of = (((line('w$')-line('w0'))/4)+line('w0'))
-	let cl = line('.')
-	let diff = (cl - of)
-	echo diff
-	if (of < cl)
-		let diff = (cl - of)
-		execute "normal " . diff . "\<c-e>"
-		execute "normal :echo " . diff
-	endif
-	if (cl > of)
-		let diff = (of - cl)
-		execute "normal " . diff . "\<c-y>"
-		execute "normal :echo " . diff
-	endif	
+function! RedrawNew()
+	let diff = (line('.') - (((line('w$')-line('w0'))/4)+line('w0')))
+	if diff > 0 | execute "normal ".diff."\<c-e>" | elseif diff < 0 | execute "normal ".(-1*diff)."\<c-y>" | endif
 endfunction
 
 " use \& to create split view with currently open file and enable scrollbind
