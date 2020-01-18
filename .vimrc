@@ -11,8 +11,8 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Usefull links
 " http://vimdoc.sourceforge.net/htmldoc/options.html 	" web version of :help documentation
-" https://devhints.io/vimscript 			" vim scripting cheatsheet
-" https://jonasjacek.github.io/colors/ 			" 256 colors
+" https://devhints.io/vimscript							" vim scripting cheatsheet
+" https://jonasjacek.github.io/colors/					" 256 colors
 
 " if scrolling is slow, it's most likely due to: https://github.com/vim/vim/issues/2584
 " update your vim installation or disable relative number and cursorline options
@@ -30,7 +30,6 @@ if filereadable(expand("~/.vimrc.local"))
 		call plug#end()
 	endif 
 endif
-
 
 """""""""""
 " Options "
@@ -58,31 +57,30 @@ set autoindent		" yet to try this option. perhaps only for python?
     "For using in graphical window, add parameters guibg=darkred guifg=white
 "nnoremap H :set cursorline! cursorcolumn!<CR>
 
-" line numbers
+" Line numbers
 set number 
-" relativenumber makes scrolling slow in certain versions
 augroup numbertoggle            " auto-toggle between hybrid and absolute line numbers in command and insert modes respectively 
   autocmd!
   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
 
-" indentation
+" Indentation
 setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype yaml setlocal tabstop=4 softtabstop=0 shiftwidth=2 smarttab expandtab 
 autocmd Filetype tcl setlocal expandtab
 
-" flagging unnecessary whitespace
+" Flagging unnecessary whitespace
 highlight BadWhitespace ctermbg=red guibg=red
-autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h,*.tcl match BadWhitespace /\s\+$/
 
 """"""""""""
 " Mappings "
 """"""""""""
 nnoremap <silent> z/ :call RedrawNew()<cr>
-" redraw line at 1/4 way down from top of window " similar to z. and z<Enter>
-" doesn't work well when folded lines are present in current visible lines
+" Redraw line at 1/4 way down from top of window " similar to z. and z<Enter>
+" Doesn't work well when folded lines are present in current visible lines
 function! Redraw()
 	let of = ((line('w$')-line('w0'))/4)
 	execute "normal z\<cr>" . of . "\<c-y>"
@@ -92,30 +90,34 @@ function! RedrawNew()
 	if diff > 0 | execute "normal ".diff."\<c-e>" | elseif diff < 0 | execute "normal ".(-1*diff)."\<c-y>" | endif
 endfunction
 
-" use \& to create split view with currently open file and enable scrollbind
+" Use \& to create split view with currently open file and enable scrollbind
 if &splitright ==? "splitright" || &splitright
 	nnoremap <leader>& :vs<cr>2<c-w>w<c-f>:set scb<cr>1<c-w>w:set scb<cr> 
 elseif &splitright ==? "nosplitright" || &splitright
 	nnoremap <leader>& :vs<cr>:set scb<cr>2<c-w>w<c-f>:set scb<cr>1<c-w>w 
 endif
 
-" use \* to close split on the right and disable scrollbind 
+" Use \* to close split on the right and disable scrollbind 
 nnoremap <leader>* 2<c-w>w:set noscb<cr>:q<cr>:set noscb<cr> 
 
-" use \m to toggle mouse between all and disabled
+" Use \m to toggle mouse between all and disabled
 map <leader>m <ESC>:exec &mouse!=""? "set mouse=" : "set mouse=a"<CR>
 
-" use jj to exit insert mode
+" Use jj to exit insert mode
 imap jj <Esc>		
 nmap :W :w
 nmap :Q :q
 nmap :WQ :wq
-" move vertically by visual line (usefull for wrapped lines)
+" Move vertically by visual line (usefull for wrapped lines)
 nnoremap j gj
 nnoremap k gk
-" turn off search highlight
+" Turn off search highlight
 " nnoremap <leader><space> :nohlsearch<CR>
- 
+" Quicker window movement
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
 
 """""""""""
 " Folding "
@@ -125,16 +127,16 @@ autocmd Filetype c setlocal foldmethod=syntax " syntax folding for C files
 set foldnestmax=10 
 set nofoldenable
 set foldlevel=2
-" space open/closes folds
+" Space open/closes folds
 nnoremap <space> za	
-" unfold all (Ctrl-<Space>)
+" Unfold all (Ctrl-<Space>)
 nnoremap <C-@> zR	
 
 
 """"""""""""""""""""""""""""""""""
 " Statusline, Tabline, VertSplit "
 """"""""""""""""""""""""""""""""""
-" colors used in status- and tabline
+" Colors used in status- and tabline
 if $TERM ==? 'xterm'
 	" Simple colors
 	highlight h_color1 ctermbg=15 ctermfg=4
@@ -156,25 +158,25 @@ else " xterm-256color
 "	highlight h_warning ctermbg=160 ctermfg=0  
 endif
 
-" highlight TabLineSel ctermfg=15 ctermbg=0
+" Highlight TabLineSel ctermfg=15 ctermbg=0
 highlight! link TabLineSel h_color2
 highlight! link TabLine h_color1
 highlight! link TabLineFill h_color1
 
-" set color split line
+" Set color split line
 highlight! VertSplit cterm=NONE				 
 set fillchars=
 set fillchars+=vert:│ " for vertical split
 set fillchars+=fold:· " for folds
 
-" statusline
+" Statusline
 set laststatus=2        	" always show statusline
 set statusline=
 " set statusline+=[%n] 		    " buffer number
 set statusline+=%#h_warning#
 set statusline+=%m 		        " modified flag
 set statusline+=%#h_color2#
-set statusline+=%{StatuslineGit()}		"u+2387   # slows down scrolling and introduces weird characters. The statusline is reloaded every time the cursor moves. that's why it's slow.  
+set statusline+=%{StatuslineGit()}
 set statusline+=%#h_warning#
 set statusline+=%r		        "read only flag
 set statusline+=%#h_color1#\ 
@@ -201,4 +203,5 @@ function! StatuslineGit()
 endfunction
 
 autocmd TabEnter,BufEnter,FocusGained * call GitBranch()
+
 
