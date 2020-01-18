@@ -197,7 +197,7 @@ endfunction
 
 function! StatuslineGit()
   return strlen(b:branchname) > 0?' '.'  '.b:branchname.' ':''
-" u2387 ⎇,  ue0a0  (branch symbols)
+" u2387 ⎇ ,  ue0a0  (branch symbols)
 endfunction
 
 autocmd TabEnter,BufEnter,FocusGained * call GitBranch()
