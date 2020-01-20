@@ -103,6 +103,11 @@ nnoremap <leader>* 2<c-w>w:set noscb<cr>:q<cr>:set noscb<cr>
 " Use \m to toggle mouse between all and disabled
 map <leader>m <ESC>:exec &mouse!=""? "set mouse=" : "set mouse=a"<CR>
 
+" use \m to disable all numbers
+" TODO: enable/disable augroup numbertoggle
+"map <leader>n :set invnu<cr>:set invrnu<cr>
+
+
 " Use jj to exit insert mode
 imap jj <Esc>		
 nmap :W :w
@@ -114,10 +119,17 @@ nnoremap k gk
 " Turn off search highlight
 " nnoremap <leader><space> :nohlsearch<CR>
 " Quicker window movement
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+"nnoremap <c-h> <c-w>h  "doesn't work, <c-h> exists
+nnoremap <c-l> <c-w>l
+
+
+"easier window movement
+map ,h :wincmd h<CR>
+map ,j :wincmd j<CR>
+map ,k :wincmd k<CR>
+map ,l :wincmd l<CR>
 
 """""""""""
 " Folding "
