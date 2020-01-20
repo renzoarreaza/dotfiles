@@ -27,7 +27,8 @@ fi
 
 
 # creating syslinks of config files to user's home directory
-config_files="$(ls -aF | grep -oE ".(vimrc|tmux|inputrc).*")"
+#config_files="$(ls -aF | grep -oE ".(vimrc|tmux|inputrc).*")"
+config_files="$(ls -aF | grep -oE ".(vimrc|tmux).*")" #inputrc is causing problems with ctrl-arrow to move back by word on the cli
 for file in $config_files
 do
 	if [ -f "$HOME/$file" ] && [ "$(readlink $HOME/$file)" != "$PWD/$file" ]; then
