@@ -49,21 +49,42 @@ set smartcase		" case sensitive when using capital letters
 set incsearch       " search as characters are entered
 set cursorline		" Highlight the screen line of the cursor  # makes scrolling slow 
 set autoindent		" yet to try this option. perhaps only for python?
-"set hlsearch       " highlight matches
-"hi CursorLine term=bold cterm=bold guibg=Grey40 	" change cursorline from underline to highlight
-"hi CursorLine   cterm=NONE ctermbg=darkgray
-"hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white
-    "It is setting of color for terminal: background color - ctermbg, and text color - ctermfg. 
-    "For using in graphical window, add parameters guibg=darkred guifg=white
-"nnoremap H :set cursorline! cursorcolumn!<CR>
 
-" Line numbers
+
+" New line number handling, still to fix some things
+"function! Numbers(type) 
+"	if g:toggle_nums == 1
+"		set number
+"		if a:type ==? "relative"
+"			set relativenumber
+"		endif
+"		if a:type ==? "normal"
+"			set norelativenumber
+"		endif
+"	else
+"		set nonumber
+"		set norelativenumber
+"	endif
+"endfunction
+"
+"function! Toggle_nums()
+"	let g:toggle_nums = !get(g:, 'toggle_nums', 1)
+"	call Numbers("relative")
+"endfunction
+"
+"autocmd BufEnter,FocusGained,InsertLeave * call Numbers("relative")
+"autocmd BufLeave,FocusLost,InsertEnter * call Numbers("normal")
+"
+"nnoremap <leader>n :call Toggle_nums()<cr>
+
+
 set number 
 augroup numbertoggle            " auto-toggle between hybrid and absolute line numbers in command and insert modes respectively 
   autocmd!
   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
+
 
 " Indentation
 setlocal tabstop=4 shiftwidth=4 softtabstop=4
@@ -102,10 +123,6 @@ nnoremap <leader>* 2<c-w>w:set noscb<cr>:q<cr>:set noscb<cr>
 
 " Use \m to toggle mouse between all and disabled
 map <leader>m <ESC>:exec &mouse!=""? "set mouse=" : "set mouse=a"<CR>
-
-" use \m to disable all numbers
-" TODO: enable/disable augroup numbertoggle
-"map <leader>n :set invnu<cr>:set invrnu<cr>
 
 
 " Use jj to exit insert mode
