@@ -152,8 +152,8 @@ map ,l :wincmd l<CR>
 """""""""""
 " Folding "
 """""""""""
-setlocal foldmethod=indent   
-autocmd Filetype c setlocal foldmethod=syntax " syntax folding for C files 
+setlocal foldmethod=indent  "default folding method 
+autocmd Filetype c,tcl setlocal foldmethod=syntax " syntax folding for C and tcl files 
 set foldnestmax=10 
 set nofoldenable
 set foldlevel=2
