@@ -15,7 +15,7 @@
 " https://jonasjacek.github.io/colors/					" 256 colors
 
 " if scrolling is slow, it's most likely due to: https://github.com/vim/vim/issues/2584
-" update your vim installation or disable relative number and cursorline options
+" -> update your vim installation or disable relative number and cursorline options
 
 if filereadable(expand("~/.vimrc.local"))
 	source ~/.vimrc.local
@@ -49,8 +49,13 @@ set smartcase		" case sensitive when using capital letters
 set incsearch       " search as characters are entered
 set cursorline		" Highlight the screen line of the cursor  # makes scrolling slow 
 set autoindent		" yet to try this option. perhaps only for python?
+" dynamic number settings
+autocmd BufEnter,FocusGained,InsertLeave * call Numbers("relative")
+autocmd BufLeave,FocusLost,InsertEnter * call Numbers("normal")
 
-
+"""""""""""""
+" Functions "
+"""""""""""""
 " New line number handling
 let g:toggle_nums = 1 "default/starting value
 function! Numbers(type) "changes number settings
@@ -73,10 +78,16 @@ function! Toggle_nums()
 	call Numbers("relative")
 endfunction
 
-autocmd BufEnter,FocusGained,InsertLeave * call Numbers("relative")
-autocmd BufLeave,FocusLost,InsertEnter * call Numbers("normal")
-
-nnoremap <leader>n :call Toggle_nums()<cr>
+" Redraw line at 1/4 way down from top of window " similar to z. and z<Enter>
+" Doesn't work well when folded lines are present in current visible lines
+function! Redraw()
+	let of = ((line('w$')-line('w0'))/4)
+	execute "normal z\<cr>" . of . "\<c-y>"
+endfunction
+function! RedrawNew()
+	let diff = (line('.') - (((line('w$')-line('w0'))/4)+line('w0')))
+	if diff > 0 | execute "normal ".diff."\<c-e>" | elseif diff < 0 | execute "normal ".(-1*diff)."\<c-y>" | endif
+endfunction
 
 " old line number handling
 "set number 
@@ -86,8 +97,9 @@ nnoremap <leader>n :call Toggle_nums()<cr>
 "  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 "augroup END
 
-
-" Indentation
+"""""""""""""""
+" Indentation "
+"""""""""""""""
 setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype yaml setlocal tabstop=4 softtabstop=0 shiftwidth=2 smarttab expandtab 
@@ -101,30 +113,19 @@ autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h,*.tcl match BadWhitespace /\s\+$/
 " Mappings "
 """"""""""""
 nnoremap <silent> z/ :call RedrawNew()<cr>
-" Redraw line at 1/4 way down from top of window " similar to z. and z<Enter>
-" Doesn't work well when folded lines are present in current visible lines
-function! Redraw()
-	let of = ((line('w$')-line('w0'))/4)
-	execute "normal z\<cr>" . of . "\<c-y>"
-endfunction
-function! RedrawNew()
-	let diff = (line('.') - (((line('w$')-line('w0'))/4)+line('w0')))
-	if diff > 0 | execute "normal ".diff."\<c-e>" | elseif diff < 0 | execute "normal ".(-1*diff)."\<c-y>" | endif
-endfunction
 
 " Use \& to create split view with currently open file and enable scrollbind
 if &splitright ==? "splitright" || &splitright
-	nnoremap <leader>& :vs<cr>2<c-w>w<c-f>:set scb<cr>1<c-w>w:set scb<cr> 
+	noremap <leader>& :vs<cr>2<c-w>w<c-f>:set scb<cr>1<c-w>w:set scb<cr> 
 elseif &splitright ==? "nosplitright" || &splitright
-	nnoremap <leader>& :vs<cr>:set scb<cr>2<c-w>w<c-f>:set scb<cr>1<c-w>w 
+	noremap <leader>& :vs<cr>:set scb<cr>2<c-w>w<c-f>:set scb<cr>1<c-w>w 
 endif
-
 " Use \* to close split on the right and disable scrollbind 
-nnoremap <leader>* 2<c-w>w:set noscb<cr>:q<cr>:set noscb<cr> 
-
+noremap <leader>* 2<c-w>w:set noscb<cr>:q<cr>:set noscb<cr> 
 " Use \m to toggle mouse between all and disabled
 map <leader>m <ESC>:exec &mouse!=""? "set mouse=" : "set mouse=a"<CR>
-
+" use \n to toggle numbers
+map <leader>n :call Toggle_nums()<cr>
 
 " Use jj to exit insert mode
 imap jj <Esc>		
@@ -136,12 +137,6 @@ nnoremap j gj
 nnoremap k gk
 " Turn off search highlight
 " nnoremap <leader><space> :nohlsearch<CR>
-" Quicker window movement
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-"nnoremap <c-h> <c-w>h  "doesn't work, <c-h> exists
-nnoremap <c-l> <c-w>l
-
 
 "easier window movement
 map ,h :wincmd h<CR>
