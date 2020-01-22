@@ -52,14 +52,14 @@ set autoindent		" yet to try this option. perhaps only for python?
 " dynamic number settings
 autocmd BufEnter,FocusGained,InsertLeave * call Numbers("relative")
 autocmd BufLeave,FocusLost,InsertEnter * call Numbers("normal")
+autocmd BufRead * let b:toggle_nums = 1 "default/starting value
 
 """""""""""""
 " Functions "
 """""""""""""
 " New line number handling
-let g:toggle_nums = 1 "default/starting value
 function! Numbers(type) "changes number settings
-	if g:toggle_nums == 1
+	if b:toggle_nums == 1
 		set number
 		if a:type ==? "relative"
 			set relativenumber
@@ -74,7 +74,7 @@ function! Numbers(type) "changes number settings
 endfunction
 
 function! Toggle_nums() 
-	let g:toggle_nums = !get(g:, 'toggle_nums', 1)
+	let b:toggle_nums = !get(b:, 'toggle_nums', 1)
 	call Numbers("relative")
 endfunction
 
