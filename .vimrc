@@ -49,6 +49,7 @@ set smartcase		" case sensitive when using capital letters
 set incsearch       " search as characters are entered
 set cursorline		" Highlight the screen line of the cursor  # makes scrolling slow 
 set autoindent		" yet to try this option. perhaps only for python?
+set hidden			" to allow editing multiple buffers without saving
 " dynamic number settings
 "let b:toggle_nums = 1
 "autocmd BufRead * let b:toggle_nums = 1 "default/starting value
@@ -207,13 +208,14 @@ set statusline+=%{StatuslineGit()}
 set statusline+=%#h_warning#
 set statusline+=%r		        "read only flag
 set statusline+=%#h_color1#\ 
+set statusline+=[%n]\ 			" buffer number
 set statusline+=<<\ 		
 set statusline+=%-40.40(%F\ >>%)%< 		" F: full path to file in buffer, <: where to truncate if line is too long, 
 ""set statusline+=%F\ >>		            " F: full path to file in buffer
 set statusline+=%= 			    " =: separation between left and right aligned items
 set statusline+=%#h_color2#
 set statusline+=\ \☰\ %l:%c
-set statusline+=\ %L              "
+set statusline+=\ %L            "number of lines in buffer
 set statusline+=\ %p%%\ 
 set statusline+=%#h_color1#
 set statusline+=%y              " y: type of file in buffer e.g [python], [javascript] or [vim] 
