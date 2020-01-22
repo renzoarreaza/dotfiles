@@ -50,15 +50,17 @@ set incsearch       " search as characters are entered
 set cursorline		" Highlight the screen line of the cursor  # makes scrolling slow 
 set autoindent		" yet to try this option. perhaps only for python?
 " dynamic number settings
+"let b:toggle_nums = 1
+"autocmd BufRead * let b:toggle_nums = 1 "default/starting value
 autocmd BufEnter,FocusGained,InsertLeave * call Numbers("relative")
 autocmd BufLeave,FocusLost,InsertEnter * call Numbers("normal")
-autocmd BufRead * let b:toggle_nums = 1 "default/starting value
 
 """""""""""""
 " Functions "
 """""""""""""
 " New line number handling
 function! Numbers(type) "changes number settings
+	let b:toggle_nums = get(b:, 'toggle_nums', 1)
 	if b:toggle_nums == 1
 		set number
 		if a:type ==? "relative"
