@@ -50,6 +50,7 @@ set incsearch       " search as characters are entered
 set cursorline		" Highlight the screen line of the cursor  # makes scrolling slow 
 set autoindent		" yet to try this option. perhaps only for python?
 set hidden			" to allow editing multiple buffers without saving
+"set colorcolumn=120
 " dynamic number settings
 "let b:toggle_nums = 1
 "autocmd BufRead * let b:toggle_nums = 1 "default/starting value
