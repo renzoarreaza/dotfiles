@@ -107,6 +107,7 @@ setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype yaml setlocal tabstop=4 softtabstop=0 shiftwidth=2 smarttab expandtab 
 autocmd Filetype tcl setlocal expandtab
+autocmd Filetype python setlocal tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 
 " Flagging unnecessary whitespace
 highlight BadWhitespace ctermbg=red guibg=red
@@ -132,9 +133,9 @@ map <leader>n :call Toggle_nums()<cr>
 
 " Use jj to exit insert mode
 imap jj <Esc>		
-nmap :W :w
-nmap :Q :q
-nmap :WQ :wq
+"nmap :W :w
+"nmap :Q :q
+"nmap :WQ :wq
 " Move vertically by visual line (usefull for wrapped lines)
 nnoremap j gj
 nnoremap k gk
@@ -174,8 +175,8 @@ else " xterm-256color
 	" Default 
 "	Blues
 	highlight h_color1 ctermbg=39 ctermfg=16	"cterm=bold		" light blue
-	highlight h_color2 ctermbg=25 ctermfg=15			" dark blue 
-	highlight h_warning ctermbg=196 ctermfg=15			" red 
+	highlight h_color2 ctermbg=25 ctermfg=231			" dark blue 
+	highlight h_warning ctermbg=196 ctermfg=231			" red 
 	" Grays
 "	highlight h_color1 ctermbg=243 ctermfg=15	" light gray 
 "	highlight h_color2 ctermbg=238 ctermfg=15 	" dark gray
@@ -215,8 +216,8 @@ set statusline+=%-40.40(%F\ >>%)%< 		" F: full path to file in buffer, <: where 
 set statusline+=%= 			    " =: separation between left and right aligned items
 set statusline+=%#h_color2#
 set statusline+=\ \☰\ %l:%c
-set statusline+=\ %L            "number of lines in buffer
-set statusline+=\ %p%%\ 
+set statusline+=\ │\ %L\             "number of lines in buffer
+"set statusline+=\ %p%%\ 
 set statusline+=%#h_color1#
 set statusline+=%y              " y: type of file in buffer e.g [python], [javascript] or [vim] 
 set statusline+=[%{&ff}]        " ff: file format e.g [unix] or [dos]
