@@ -216,8 +216,15 @@ set statusline+=%-40.40(%F\ >>%)%< 		" F: full path to file in buffer, <: where 
 ""set statusline+=%F\ >>		            " F: full path to file in buffer
 set statusline+=%= 			    " =: separation between left and right aligned items
 set statusline+=%#h_color2#
-set statusline+=\ \☰\ %l:%c
-set statusline+=\ │\ %L\             "number of lines in buffer
+" line info option 1
+"set statusline+=\ \☰\ %l:%c
+"set statusline+=\ │\ %L\             "number of lines in buffer
+" line info option 2
+"set statusline+=\ \☰\ %L\ │
+"set statusline+=\ %l:%c\ 
+" line info option 3
+set statusline+=\ \☰\ %l/%L\ :
+set statusline+=\ %c\ 
 "set statusline+=\ %p%%\ 
 set statusline+=%#h_color1#
 set statusline+=%y              " y: type of file in buffer e.g [python], [javascript] or [vim] 
