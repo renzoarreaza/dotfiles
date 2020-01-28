@@ -223,9 +223,9 @@ set statusline+=%#h_color2#
 "set statusline+=\ \☰\ %L\ │
 "set statusline+=\ %l:%c\ 
 " line info option 3
-set statusline+=\ \☰\ %l/%L\ :
-set statusline+=\ %c\ 
-"set statusline+=\ %p%%\ 
+set statusline+=\ %p%%\ 
+set statusline+=\☰\ %l:
+set statusline+=%c\ 
 set statusline+=%#h_color1#
 set statusline+=%y              " y: type of file in buffer e.g [python], [javascript] or [vim] 
 set statusline+=[%{&ff}]        " ff: file format e.g [unix] or [dos]
