@@ -2,6 +2,7 @@
 
 function plugins_setup {
 	# Get latest plug.vim 
+	echo "getting latest vim-plug..."
 	wget https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim -O plug.vim &> /dev/null
 	# adding plug.vim to autoload
 	mkdir ~/.vim/autoload -p
