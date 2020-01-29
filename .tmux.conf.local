@@ -296,8 +296,6 @@ tmux_conf_copy_to_os_clipboard=false
 set -gu prefix2
 unbind C-a
 set-window-option -g aggressive-resize
-# do not clear history when clearing screen
-unbind -n C-l
 
 # move status line to top
 #set -g status-position top
