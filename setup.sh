@@ -1,4 +1,5 @@
 #!/bin/bash
+#tmux attach -t ws || tmux new -s ws
 
 function plugins_setup {
 	# Get latest plug.vim 
