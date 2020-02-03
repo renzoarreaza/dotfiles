@@ -295,7 +295,16 @@ tmux_conf_copy_to_os_clipboard=false
 # remove secondary prefix key 
 set -gu prefix2
 unbind C-a
+
+# help avoid problems with usable space
 set-window-option -g aggressive-resize
+
+# do not clear history when clearing screen
+unbind -n C-l
+
+# adding a secondary prefix key
+set -g prefix2 M-Space
+bind M-Space send-prefix -2
 
 # move status line to top
 #set -g status-position top
