@@ -169,29 +169,31 @@ nnoremap <leader><space> zR
 " Colors used in status- and tabline
 if $TERM ==? 'xterm'
 	" Simple colors
-	highlight h_color1 ctermbg=15 ctermfg=4
-	highlight h_color2 ctermbg=4 ctermfg=15
-	highlight h_warning ctermbg=1 ctermfg=0
+	highlight hl1 ctermbg=15 ctermfg=4
+	highlight hl2 ctermbg=4 ctermfg=15
+	highlight hl3 ctermbg=1 ctermfg=0
 else " xterm-256color
 	" Default 
 "	Blues
-	highlight h_color1 ctermbg=39 ctermfg=16	"cterm=bold		" light blue
-	highlight h_color2 ctermbg=25 ctermfg=231			" dark blue 
-	highlight h_warning ctermbg=196 ctermfg=231			" red 
+	highlight hl1 ctermbg=39 ctermfg=16	"cterm=bold		" light blue
+	highlight hl2 ctermbg=25 ctermfg=231			" dark blue 
+	highlight hl12 ctermbg=39 ctermfg=25	
+	highlight hl21 ctermbg=25 ctermfg=39		
+	highlight hl3 ctermbg=196 ctermfg=231			" red 
 	" Grays
-"	highlight h_color1 ctermbg=243 ctermfg=15	" light gray 
-"	highlight h_color2 ctermbg=238 ctermfg=15 	" dark gray
-"	highlight h_warning ctermbg=160 ctermfg=0 	" softer red 
+"	highlight hl1 ctermbg=243 ctermfg=15	" light gray 
+"	highlight hl2 ctermbg=238 ctermfg=15 	" dark gray
+"	highlight hl3 ctermbg=160 ctermfg=0 	" softer red 
 	" 
-"	highlight h_color1 ctermbg=184 ctermfg=15  
-"	highlight h_color2 ctermbg=107 ctermfg=15 
-"	highlight h_warning ctermbg=160 ctermfg=0  
+"	highlight hl1 ctermbg=184 ctermfg=15  
+"	highlight hl2 ctermbg=107 ctermfg=15 
+"	highlight hl3 ctermbg=160 ctermfg=0  
 endif
 
 " Highlight TabLineSel ctermfg=15 ctermbg=0
-highlight! link TabLineSel h_color2
-highlight! link TabLine h_color1
-highlight! link TabLineFill h_color1
+highlight! link TabLineSel hl2
+highlight! link TabLine hl1
+highlight! link TabLineFill hl1
 
 " Set color split line
 highlight! VertSplit cterm=NONE				 
@@ -199,27 +201,30 @@ set fillchars=
 set fillchars+=vert:│ " for vertical split
 set fillchars+=fold:· " for folds
 
+
 " Statusline
 set laststatus=2        	" always show statusline
 set statusline=
-" set statusline+=[%n] 		    " buffer number
-set statusline+=%#h_warning#
+set statusline+=%#hl3#
 set statusline+=%m 		        " modified flag
-set statusline+=%#h_color2#
+set statusline+=%#hl2#
 set statusline+=%{StatuslineGit()}
-set statusline+=%#h_warning#
+set statusline+=%#hl3#
 set statusline+=%r		        "read only flag
-set statusline+=%#h_color1#\ 
-set statusline+=[%n]\ 			" buffer number
+set statusline+=%#hl1#\ 
 set statusline+=<<\ 		
-set statusline+=%-40.40(%F\ >>%)%< 		" F: full path to file in buffer, <: where to truncate if line is too long, 
+set statusline+=%-40.40(%F\ [%n]>>%)%< 		" F: full path to file in buffer, <: where to truncate if line is too long, n: buffer number 
 ""set statusline+=%F\ >>		            " F: full path to file in buffer
 set statusline+=%= 			    " =: separation between left and right aligned items
-set statusline+=%#h_color2#
+"set statusline+=%#hl12#
+"set statusline+=
+set statusline+=%#hl2#
 set statusline+=\ %p%%\ 
 set statusline+=\☰\ %l:
 set statusline+=%c\ 
-set statusline+=%#h_color1#
+"set statusline+=%#hl21#
+"set statusline+=
+set statusline+=%#hl1#
 set statusline+=%y              " y: type of file in buffer e.g [python], [javascript] or [vim] 
 set statusline+=[%{&ff}]        " ff: file format e.g [unix] or [dos]
 set statusline+=[%{&fenc}]      " fenc: file encoding e.g [utf-8]
@@ -236,4 +241,7 @@ endfunction
 
 autocmd TabEnter,BufEnter,FocusGained * call GitBranch()
 
-
+" uE0B0  
+" uE0B1 
+" uE0B2 
+" uE0B3 
