@@ -302,9 +302,13 @@ set-window-option -g aggressive-resize
 # do not clear history when clearing screen
 unbind -n C-l
 
+## adding a secondary prefix key
+#set -g prefix2 M-Space
+#bind M-Space send-prefix -2
+
 # adding a secondary prefix key
-set -g prefix2 M-Space
-bind M-Space send-prefix -2
+set -g prefix2 C-Space
+bind C-Space send-prefix -2
 
 # move status line to top
 #set -g status-position top

@@ -160,8 +160,8 @@ set foldlevel=2
 " Space open/closes folds
 nnoremap <space> za	
 " Unfold all (Ctrl-<Space>)
-nnoremap <C-@> zR	
-
+" nnoremap <C-@> zR	
+nnoremap <leader><space> zR
 
 """"""""""""""""""""""""""""""""""
 " Statusline, Tabline, VertSplit "
