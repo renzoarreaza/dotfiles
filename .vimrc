@@ -17,6 +17,8 @@
 " if scrolling is slow, it's most likely due to: https://github.com/vim/vim/issues/2584
 " -> update your vim installation or disable relative number and cursorline options
 
+" To Do; check for relativenumber support
+
 if filereadable(expand("~/.vimrc.local"))
 	source ~/.vimrc.local
 	if enable_plugins == 'true'
@@ -83,7 +85,7 @@ function! Toggle_nums()
 endfunction
 
 " Redraw line at 1/4 way down from top of window " similar to z. and z<Enter>
-" Doesn't work well when folded lines are present in current visible lines
+" Doesn't work well when folded lines are present in current visible lines  (is it possible to get the top and bottom relative line numbers??)
 function! Redraw()
 	let of = ((line('w$')-line('w0'))/4)
 	execute "normal z\<cr>" . of . "\<c-y>"
@@ -107,7 +109,7 @@ endfunction
 setlocal tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype yaml setlocal tabstop=4 softtabstop=0 shiftwidth=2 smarttab expandtab 
-autocmd Filetype tcl setlocal expandtab
+"autocmd Filetype tcl setlocal expandtab
 autocmd Filetype python setlocal tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 
 " Flagging unnecessary whitespace
@@ -121,16 +123,18 @@ nnoremap <silent> z/ :call RedrawNew()<cr>
 
 " Use \& to create split view with currently open file and enable scrollbind
 if &splitright ==? "splitright" || &splitright
-	noremap <leader>& :vs<cr>2<c-w>w<c-f>:set scb<cr>1<c-w>w:set scb<cr> 
+	noremap <silent> <leader>& :vs<cr>2<c-w>w<c-f>:set scb<cr>1<c-w>w:set scb<cr> 
 elseif &splitright ==? "nosplitright" || &splitright
-	noremap <leader>& :vs<cr>:set scb<cr>2<c-w>w<c-f>:set scb<cr>1<c-w>w 
+	noremap <silent> <leader>& :vs<cr>:set scb<cr>2<c-w>w<c-f>:set scb<cr>1<c-w>w 
 endif
 " Use \* to close split on the right and disable scrollbind 
 noremap <leader>* 2<c-w>w:set noscb<cr>:q<cr>:set noscb<cr> 
 " Use \m to toggle mouse between all and disabled
-map <leader>m <ESC>:exec &mouse!=""? "set mouse=" : "set mouse=a"<CR>
+map <silent> <leader>m <ESC>:exec &mouse!=""? "set mouse=" : "set mouse=a"<CR>
 " use \n to toggle numbers
-map <leader>n :call Toggle_nums()<cr>
+map <silent> <leader>n :call Toggle_nums()<cr>
+"use \<tab> to go to most recent buffer 
+map <leader><Tab> :b#<cr>
 
 " Use jj to exit insert mode
 imap jj <Esc>		
@@ -153,7 +157,7 @@ map ,l :wincmd l<CR>
 " Folding "
 """""""""""
 setlocal foldmethod=indent  "default folding method 
-autocmd Filetype c,tcl setlocal foldmethod=syntax " syntax folding for C and tcl files 
+autocmd Filetype c setlocal foldmethod=syntax " syntax folding for C (and tcl files; not working)
 set foldnestmax=10 
 set nofoldenable
 set foldlevel=2
@@ -212,7 +216,7 @@ set statusline+=%{StatuslineGit()}
 set statusline+=%#hl3#
 set statusline+=%r		        "read only flag
 set statusline+=%#hl1#\ 
-set statusline+=<<\ 		
+set statusline+=<<\ 
 set statusline+=%-40.40(%F\ [%n]>>%)%< 		" F: full path to file in buffer, <: where to truncate if line is too long, n: buffer number 
 ""set statusline+=%F\ >>		            " F: full path to file in buffer
 set statusline+=%= 			    " =: separation between left and right aligned items
@@ -241,7 +245,7 @@ endfunction
 
 autocmd TabEnter,BufEnter,FocusGained * call GitBranch()
 
-" uE0B0  
+" uE0B0 
 " uE0B1 
 " uE0B2 
 " uE0B3 
