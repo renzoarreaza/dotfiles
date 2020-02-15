@@ -33,6 +33,7 @@ if filereadable(expand("~/.vimrc.local"))
 	endif 
 endif
 
+
 """""""""""
 " Options "
 """""""""""
@@ -85,14 +86,23 @@ function! Toggle_nums()
 endfunction
 
 " Redraw line at 1/4 way down from top of window " similar to z. and z<Enter>
-" Doesn't work well when folded lines are present in current visible lines  (is it possible to get the top and bottom relative line numbers??)
-function! Redraw()
-	let of = ((line('w$')-line('w0'))/4)
+function Redraw()
+	let l:startl = line('.')
+	let l:startc = col('.')
+    let l:lines = 0
+    normal! H
+    while (line('.') < line('w$'))
+        let l:lines += 1
+        normal! j
+		if line('.') == l:startl
+			let l:topl = l:lines
+		endif
+    endwhile
+	execute "normal " . l:startl . "\G"
+	let of = l:lines/4
 	execute "normal z\<cr>" . of . "\<c-y>"
-endfunction
-function! RedrawNew()
-	let diff = (line('.') - (((line('w$')-line('w0'))/4)+line('w0')))
-	if diff > 0 | execute "normal ".diff."\<c-e>" | elseif diff < 0 | execute "normal ".(-1*diff)."\<c-y>" | endif
+	execute "normal 0" . l:startc . "l"
+    "return l:lines
 endfunction
 
 " old line number handling
@@ -119,7 +129,7 @@ autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h,*.tcl match BadWhitespace /\s\+$/
 """"""""""""
 " Mappings "
 """"""""""""
-nnoremap <silent> z/ :call RedrawNew()<cr>
+nnoremap <silent> z/ :call Redraw()<cr>
 
 " Use \& to create split view with currently open file and enable scrollbind
 if &splitright ==? "splitright" || &splitright
