@@ -101,7 +101,7 @@ function Redraw()
 	execute "normal " . l:startl . "\G"
 	let of = l:lines/4
 	execute "normal z\<cr>" . of . "\<c-y>"
-	execute "normal 0" . l:startc . "l"
+	execute "normal 0" . (l:startc-1) . "l"
     "return l:lines
 endfunction
 
