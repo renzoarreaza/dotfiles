@@ -86,6 +86,7 @@ function! Toggle_nums()
 endfunction
 
 " Redraw line at 1/4 way down from top of window " similar to z. and z<Enter>
+" see vim/src/testdir/test_number.vim  line 9, ScreenLines()
 function Redraw()
 	let l:startl = line('.')
 	let l:startc = col('.')
@@ -116,7 +117,7 @@ endfunction
 """""""""""""""
 " Indentation "
 """""""""""""""
-setlocal tabstop=4 shiftwidth=4 softtabstop=4
+set tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype yaml setlocal tabstop=4 softtabstop=0 shiftwidth=2 smarttab expandtab 
 "autocmd Filetype tcl setlocal expandtab
@@ -166,7 +167,7 @@ map ,l :wincmd l<CR>
 """""""""""
 " Folding "
 """""""""""
-setlocal foldmethod=indent  "default folding method 
+set foldmethod=indent  "default folding method 
 autocmd Filetype c setlocal foldmethod=syntax " syntax folding for C (and tcl files; not working)
 set foldnestmax=10 
 set nofoldenable

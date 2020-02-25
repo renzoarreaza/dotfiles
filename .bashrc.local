@@ -1,0 +1,8 @@
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+HISTCONTROL=ignorespace
+#tmux configuration expects $TERM to be set to "xterm-256color" outside of tmux
+export TERM="xterm-256color"
