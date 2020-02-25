@@ -36,7 +36,6 @@ do
 		ln -s -f $PWD/$file $HOME/
 	fi
 done
-echo "files have been linked to home directory"
 
 # adding additional bash (shell) settings
 if [[ "$SHELL" == *"bash"* ]]; then
