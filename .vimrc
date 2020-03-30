@@ -1,4 +1,4 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "	__      __ _            
 " 	\ \    / /(_)           
 " 	 \ \  / /  _  _ __ ___  
@@ -19,15 +19,22 @@
 
 " To Do; check for relativenumber support
 
+let &pythonthreedll = '/opt/python-3/lib/libpython3.6m.so.1.0'
+set clipboard=exclude:.*
 if filereadable(expand("~/.vimrc.local"))
 	source ~/.vimrc.local
 	if enable_plugins == 'true'
 		call plug#begin('~/.vim/plugged')
 		"Plug 'davidhalter/jedi-vim'
 		"
+		"Plug 'dense-analysis/ale'
+		"
 		Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 		"option below is a list of strings, i.e: let g:pymode_lint_ignore=["E501","W601"]
 		let g:pymode_lint_ignore=["W191"]
+		let g:pymode_options_max_line_length = 120
+		let g:pymode_lint_options_pep8 = {'max_line_length': g:pymode_options_max_line_length}
+		let g:pymode_options_colorcolumn = 1
 
 		call plug#end()
 	endif 
@@ -53,6 +60,8 @@ set incsearch       " search as characters are entered
 set cursorline		" Highlight the screen line of the cursor  # makes scrolling slow 
 set autoindent		" yet to try this option. perhaps only for python?
 set hidden			" to allow editing multiple buffers without saving
+set wrap
+"set wrap linebreak nolist
 "set colorcolumn=120
 " dynamic number settings
 "let b:toggle_nums = 1
@@ -121,7 +130,7 @@ set tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype yaml setlocal tabstop=4 softtabstop=0 shiftwidth=2 smarttab expandtab 
 "autocmd Filetype tcl setlocal expandtab
-autocmd Filetype python setlocal tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+autocmd Filetype python setlocal tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
 
 " Flagging unnecessary whitespace
 highlight BadWhitespace ctermbg=red guibg=red
@@ -159,10 +168,10 @@ nnoremap k gk
 " nnoremap <leader><space> :nohlsearch<CR>
 
 "easier window movement
-map ,h :wincmd h<CR>
-map ,j :wincmd j<CR>
-map ,k :wincmd k<CR>
-map ,l :wincmd l<CR>
+map <silent> ,h :wincmd h<CR>
+map <silent> ,j :wincmd j<CR>
+map <silent> ,k :wincmd k<CR>
+map <silent> ,l :wincmd l<CR>
 
 """""""""""
 " Folding "
@@ -211,10 +220,14 @@ highlight! link TabLine hl1
 highlight! link TabLineFill hl1
 
 " Set color split line
-highlight! VertSplit cterm=NONE				 
+highlight! VertSplit cterm=NONE
 set fillchars=
 set fillchars+=vert:│ " for vertical split
 set fillchars+=fold:· " for folds
+
+" color of max_line
+"highlight ColorColumn ctermbg=1  "red
+highlight ColorColumn ctermbg=8  "gray
 
 
 " Statusline
@@ -246,6 +259,7 @@ set statusline+=[%{&fenc}]      " fenc: file encoding e.g [utf-8]
 ""http://vimdoc.sourceforge.net/htmldoc/options.html#'statusline'
 
 function! GitBranch()
+	"let b:toggle_nums = get(b:, 'toggle_nums', 1)
 	let b:branchname = system("cd " . expand("%:p:h") . " ; " . "git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
 endfunction
 
@@ -255,8 +269,9 @@ function! StatuslineGit()
 endfunction
 
 autocmd TabEnter,BufEnter,FocusGained * call GitBranch()
-
+call GitBranch()
 " uE0B0 
 " uE0B1 
 " uE0B2 
 " uE0B3 
+"
