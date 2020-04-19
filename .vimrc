@@ -17,7 +17,8 @@
 " if scrolling is slow, it's most likely due to: https://github.com/vim/vim/issues/2584
 " -> update your vim installation or disable relative number and cursorline options
 
-" To Do; check for relativenumber support
+"To Do; check for relativenumber support
+"vim file.py --startuptime startup.log
 
 let &pythonthreedll = '/opt/python-3/lib/libpython3.6m.so.1.0'
 set clipboard=exclude:.*
