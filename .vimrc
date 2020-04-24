@@ -32,7 +32,7 @@ if filereadable(expand("~/.vimrc.local"))
 		"
 		Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 		"option below is a list of strings, i.e: let g:pymode_lint_ignore=["E501","W601"]
-		let g:pymode_lint_ignore=["W191"]
+		"let g:pymode_lint_ignore=["W191"]
 		let g:pymode_options_max_line_length = 120
 		let g:pymode_lint_options_pep8 = {'max_line_length': g:pymode_options_max_line_length}
 		let g:pymode_options_colorcolumn = 1
@@ -167,6 +167,9 @@ nnoremap j gj
 nnoremap k gk
 " Turn off search highlight
 " nnoremap <leader><space> :nohlsearch<CR>
+"
+" Yank to end of line
+map Y y$
 
 "easier window movement
 map <silent> ,h :wincmd h<CR>
