@@ -17,7 +17,8 @@
 " if scrolling is slow, it's most likely due to: https://github.com/vim/vim/issues/2584
 " -> update your vim installation or disable relative number and cursorline options
 
-"To Do; check for relativenumber support
+"TODO; 
+"check for relativenumber support
 "vim file.py --startuptime startup.log
 
 let &pythonthreedll = '/opt/python-3/lib/libpython3.6m.so.1.0'
@@ -38,6 +39,11 @@ if filereadable(expand("~/.vimrc.local"))
 		let g:pymode_options_colorcolumn = 1
 
 		"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+		"
+		Plug 'jpalardy/vim-slime'
+		let g:slime_target = "tmux"
+		let g:slime_default_config = {"socket_name": get(split($TMUX, ","), 0), "target_pane": ":.2"}
+		let g:slime_python_ipython = 1  "deals with autoindent in ipython
 		call plug#end()
 	endif 
 endif
