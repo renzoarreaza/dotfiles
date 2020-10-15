@@ -76,6 +76,7 @@ set wrap
 "autocmd BufRead * let b:toggle_nums = 1 "default/starting value
 autocmd BufEnter,FocusGained,InsertLeave * call Numbers("relative")
 autocmd BufLeave,FocusLost,InsertEnter * call Numbers("normal")
+"autocmd BufRead *.ipy set filetype=python
 
 """""""""""""
 " Functions "
@@ -163,6 +164,11 @@ map <silent> <leader>m <ESC>:exec &mouse!=""? "set mouse=" : "set mouse=a"<CR>
 map <silent> <leader>n :call Toggle_nums()<cr>
 "use \<tab> to go to most recent buffer 
 map <leader><Tab> :b#<cr>
+"use \ to go to previous error/warning
+map <leader>k :lprevious<cr>
+"use \ to go to next error/warning
+map <leader>j :lnext<cr>
+
 
 " Use jj to exit insert mode
 imap jj <Esc>		
