@@ -168,6 +168,8 @@ map <leader><Tab> :b#<cr>
 map <leader>k :lprevious<cr>
 "use \ to go to next error/warning
 map <leader>j :lnext<cr>
+"use ;b to list buffers and select
+nnoremap ;b :ls<cr>:b<space>
 
 
 " Use jj to exit insert mode
@@ -189,6 +191,9 @@ map <silent> ,h :wincmd h<CR>
 map <silent> ,j :wincmd j<CR>
 map <silent> ,k :wincmd k<CR>
 map <silent> ,l :wincmd l<CR>
+
+" easier autocomplete
+imap <S-tab> <c-n>
 
 """""""""""
 " Folding "
