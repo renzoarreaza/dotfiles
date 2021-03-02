@@ -28,8 +28,8 @@ if filereadable(expand("~/.vimrc.local"))
 	if enable_plugins == 'true'
 		call plug#begin('~/.vim/plugged')
 		"Plug 'davidhalter/jedi-vim'
-		"
 		"Plug 'dense-analysis/ale'
+		"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 		"
 		Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 		"option below is a list of strings, i.e: let g:pymode_lint_ignore=["E501","W601"]
@@ -38,12 +38,12 @@ if filereadable(expand("~/.vimrc.local"))
 		let g:pymode_lint_options_pep8 = {'max_line_length': g:pymode_options_max_line_length}
 		let g:pymode_options_colorcolumn = 1
 
-		"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-		"
 		Plug 'jpalardy/vim-slime'
 		let g:slime_target = "tmux"
 		let g:slime_default_config = {"socket_name": get(split($TMUX, ","), 0), "target_pane": ":.2"}
 		let g:slime_python_ipython = 1  "deals with autoindent in ipython
+
+		Plug 'junegunn/vim-peekaboo'
 		call plug#end()
 	endif 
 endif
