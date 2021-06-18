@@ -77,6 +77,8 @@ set wrap
 autocmd BufEnter,FocusGained,InsertLeave * call Numbers("relative")
 autocmd BufLeave,FocusLost,InsertEnter * call Numbers("normal")
 "autocmd BufRead *.ipy set filetype=python
+autocmd BufEnter *.pysros :setlocal filetype=python
+
 
 """""""""""""
 " Functions "
