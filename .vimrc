@@ -172,6 +172,8 @@ map <leader>k :lprevious<cr>
 map <leader>j :lnext<cr>
 "use ;b to list buffers and select
 nnoremap ;b :ls<cr>:b<space>
+"execute last shell command
+nnoremap <leader>s :!!<cr>
 
 
 " Use jj to exit insert mode
@@ -185,7 +187,7 @@ nnoremap k gk
 " Turn off search highlight
 " nnoremap <leader><space> :nohlsearch<CR>
 "
-" Yank to end of line
+" Yank to end of line, same as 'D'
 map Y y$
 
 "easier window movement
